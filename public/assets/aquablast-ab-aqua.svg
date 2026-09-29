@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">AquaBlast AB monogram</title><desc id="desc">AB monogram utility mark for AquaBlast Pressure Washing</desc>
+<rect width="512" height="512" rx="112" fill="#28cbe6"/>
+<path d="M83 394 L173 117 H230 L321 394 H258 L239 329 H163 L145 394 Z M179 275 H224 L202 188 Z" fill="#04151f"/>
+<path d="M292 117 H366 C423 117 451 145 451 190 C451 219 438 241 412 253 C445 265 462 288 462 323 C462 370 430 394 367 394 H292 Z M348 168 V229 H365 C386 229 397 219 397 198 C397 178 386 168 364 168 Z M348 278 V343 H369 C395 343 408 332 408 310 C408 288 395 278 369 278 Z" fill="#04151f"/>
+<path d="M91 424 C180 382 285 372 422 391" fill="none" stroke="#bfd95b" stroke-width="18" stroke-linecap="round"/>
+<circle cx="433" cy="386" r="10" fill="#bfd95b"/><circle cx="458" cy="374" r="6" fill="#bfd95b"/><circle cx="478" cy="357" r="4" fill="#bfd95b"/>
+</svg>

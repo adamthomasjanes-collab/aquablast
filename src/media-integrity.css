@@ -1,0 +1,249 @@
+/* Phase 37.02 — media-role integrity authority.
+   Cropping is a compositional decision, not a global prohibition. Presentation
+   imagery may use an intentional crop when that improves hierarchy and layout.
+   Documentary/project photography remains evidence and preserves its full frame. */
+
+/* Presentation imagery: these images serve composition, not factual inspection. */
+.site>main>.hero>img,
+.service-card img,
+.service-page .service-hero>img,
+.location-page .location-hero>img{
+  object-fit:cover;
+  background:#082a3a;
+}
+.site>main>.hero>img{object-position:62% center}
+.service-card img{object-position:center}
+.service-page .service-hero>img,
+.location-page .location-hero>img{object-position:center}
+
+/* Documentary/company proof remains full-frame. */
+.company-proof img,
+.result-grid img{
+  object-fit:contain;
+  object-position:center;
+  background:#082a3a;
+}
+
+/* Location evidence stays source-faithful. The services directory is a
+   selection surface, so its image panels intentionally fill their card slot. */
+.location-service-card,
+.location-market-proof-grid figure{
+  overflow:visible;
+}
+.location-service-card img,
+.location-market-proof-grid img,
+.house-project-records a>img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
+  background:#e7efeb;
+}
+.services-hub-media{min-height:290px;overflow:hidden;background:#0b3445}
+.services-hub-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:#0b3445}
+.location-service-card{min-height:0}
+@media(max-width:760px){.services-hub-media{min-height:220px}}
+
+/* Project archive and project-story evidence */
+.project-archive-media,
+.project-story-media figure,
+.project-photo-open,
+.project-photo-stage{
+  overflow:visible;
+}
+.project-archive-media img,
+.featured-1 .project-archive-media img,
+.project-story-media img,
+.project-photo-open img,
+.project-photo-stage .project-photo-open img{
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  max-height:none;
+  aspect-ratio:auto;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Reviews / editorial proof should show the whole related job image. */
+.review-project-strip{
+  gap:12px;
+  background:transparent;
+}
+.review-project-strip a{
+  position:relative;
+  display:flex;
+  min-height:0;
+  flex-direction:column;
+  overflow:visible;
+  background:#082a3a;
+}
+.review-project-strip img{
+  position:static;
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
+  transform:none;
+}
+.review-project-strip a:after{display:none}
+.review-project-strip span{
+  position:static;
+  display:block;
+  padding:12px 14px 14px;
+  background:#082a3a;
+}
+.review-project-strip a:hover img,
+.review-project-strip a:focus-visible img{transform:none}
+
+.reviews-featured-media{
+  aspect-ratio:auto;
+  max-height:none;
+  overflow:visible;
+  display:flex;
+  flex-direction:column;
+}
+.reviews-featured-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  transform:none;
+  background:#082a3a;
+}
+.reviews-featured-media:hover img,
+.reviews-featured-media:focus-visible img{transform:none}
+
+.editorial-proof-panel figure{
+  min-height:0;
+  overflow:visible;
+  display:flex;
+  align-items:center;
+  background:#dce8e4;
+}
+.editorial-proof-panel img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  object-position:center;
+}
+
+.article-job-break img{
+  width:100%;
+  height:auto;
+  max-height:none;
+  aspect-ratio:auto;
+  object-fit:contain;
+}
+
+/* The private case-study portrait remains a portrait, but its full frame is
+   preserved rather than clipped into the container. */
+.case-credibility-portrait img{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Thumbnails are inspection controls: contain the whole source inside the
+   button rather than using a decorative crop. */
+.project-photo-thumbnails img{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+}
+
+@media(max-width:760px){
+  .editorial-proof-panel figure{min-height:0;max-height:none}
+  .review-project-strip a{min-height:0}
+}
+
+/* Phase 36.61 — lightbox composition repair.
+   Lightbox descendants must escape project-page figure/card sizing rules.
+   The stage gets the full remaining viewport; the image uses as much of that
+   stage as its aspect ratio and native pixels allow, without cropping. */
+.project-photo-dialog .project-photo-dialog-inner{
+  width:calc(100vw - 20px);
+  height:calc(100dvh - 20px);
+  max-width:none;
+  max-height:none;
+}
+.project-photo-dialog .project-photo-dialog-figure{
+  width:100%;
+  max-width:none;
+  min-width:0;
+  min-height:0;
+  justify-self:stretch;
+  align-self:stretch;
+  margin:0;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+  background:#03151e;
+  border:0;
+  box-shadow:none;
+  overflow:hidden;
+}
+.project-photo-dialog .project-photo-dialog-stage{
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  padding:8px;
+  box-sizing:border-box;
+}
+.project-photo-dialog .project-photo-dialog-image{
+  display:block;
+  width:auto!important;
+  height:auto!important;
+  max-width:min(100%,var(--photo-native-width,100vw))!important;
+  max-height:min(100%,var(--photo-native-height,100dvh))!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:auto;
+  background:#fff;
+}
+.project-photo-dialog .project-photo-dialog-figure figcaption{
+  width:100%;
+  max-width:none;
+  margin:0;
+  box-sizing:border-box;
+}
+@media(max-width:760px){
+  .project-photo-dialog .project-photo-dialog-stage{padding:4px}
+}
+
+/* Phase 38.26 — editorial service choosers are navigation/presentation surfaces,
+   not documentary evidence. They intentionally crop imagery to a controlled slot
+   so card hierarchy stays compact and readable. */
+.location-service-chooser .location-service-card{
+  overflow:hidden;
+}
+.location-service-chooser .location-service-card img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  max-height:none;
+  aspect-ratio:auto;
+  object-fit:cover;
+  object-position:center;
+  background:#0b3443;
+}
+@media(max-width:760px){
+  .location-service-chooser .location-service-card img{
+    height:auto;
+    aspect-ratio:16/10;
+    object-fit:cover;
+  }
+}

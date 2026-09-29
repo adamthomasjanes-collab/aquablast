@@ -1,0 +1,12 @@
+{
+  "generatedFrom": "qa/live-url-inventory.json + src/data/seoLaunchContract.js",
+  "productionOrigin": "https://www.aquablastpw.com",
+  "sitemapRouteCount": 104,
+  "legacySitemapRouteCount": 102,
+  "newIndexableRoutes": [
+    "/paver-cleaning-sealing",
+    "/exterior-care-checklist"
+  ],
+  "redirectCount": 20,
+  "feedItemCount": 63
+}

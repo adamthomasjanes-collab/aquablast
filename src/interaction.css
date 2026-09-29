@@ -1,0 +1,422 @@
+/* Phase 36.62 — tangible interaction pass.
+   Motion is short, physical and state-driven: hover/focus/press feedback, restrained
+   scroll reveals, and subtle pointer response. No perpetual decorative motion. */
+
+:root{
+  --aqua-ease:cubic-bezier(.2,.72,.2,1);
+  --aqua-fast:150ms;
+  --aqua-medium:260ms;
+  --aqua-focus:0 0 0 3px rgba(191,217,91,.34);
+}
+
+/* Every native button receives a readable interaction state without overriding
+   component-specific color systems. Existing specialized hover styles still win. */
+button:not(:disabled){
+  transition:
+    transform var(--aqua-fast) var(--aqua-ease),
+    box-shadow var(--aqua-fast) var(--aqua-ease),
+    border-color var(--aqua-fast) ease,
+    background-color var(--aqua-fast) ease,
+    color var(--aqua-fast) ease,
+    filter var(--aqua-fast) ease;
+}
+button:not(:disabled):focus-visible{
+  outline:2px solid var(--chartreuse);
+  outline-offset:3px;
+  box-shadow:var(--aqua-focus);
+}
+@media(hover:hover) and (pointer:fine){
+  button:not(:disabled):not(.project-photo-open):hover{
+    transform:translateY(-2px);
+    filter:brightness(1.045);
+    box-shadow:0 8px 18px rgba(2,24,34,.16);
+  }
+}
+button:not(:disabled):active{
+  transform:translateY(0) scale(.985)!important;
+  box-shadow:none!important;
+  transition-duration:65ms;
+}
+button:disabled{filter:saturate(.7)}
+
+/* Button-like links share the same physical language. */
+:where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary){
+  position:relative;
+  overflow:hidden;
+  transform:translateZ(0);
+  transition:
+    transform var(--aqua-fast) var(--aqua-ease),
+    box-shadow var(--aqua-fast) var(--aqua-ease),
+    border-color var(--aqua-fast) ease,
+    background-color var(--aqua-fast) ease,
+    color var(--aqua-fast) ease;
+}
+:where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary) span[aria-hidden="true"]{
+  display:inline-block;
+  transition:transform var(--aqua-fast) var(--aqua-ease),color var(--aqua-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary):hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(2,24,34,.18);
+  }
+  :where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary):hover span[aria-hidden="true"]{
+    transform:translateX(4px);
+  }
+  .hero-actions .secondary:hover span[aria-hidden="true"]{transform:translateY(3px)}
+}
+:where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary):active{
+  transform:translateY(0) scale(.985);
+  box-shadow:none;
+  transition-duration:65ms;
+}
+:where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary):focus-visible{
+  outline:2px solid var(--chartreuse);
+  outline-offset:3px;
+  box-shadow:var(--aqua-focus);
+}
+
+/* Primary CTA gets a restrained sweep that only appears in response to intent. */
+.cta::after{
+  content:'';
+  position:absolute;
+  inset:-35% auto -35% -34%;
+  width:26%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);
+  transform:skewX(-18deg) translateX(-180%);
+  transition:transform 430ms var(--aqua-ease);
+}
+@media(hover:hover) and (pointer:fine){.cta:hover::after{transform:skewX(-18deg) translateX(650%)}}
+
+/* Header/nav feedback is intentionally quieter than conversion CTAs. */
+.header nav a,.editorial-header nav a,.service-header nav a,.projects-header nav a,.phone,
+.footer-links a,.editorial-footer-links a{
+  position:relative;
+  transition:color var(--aqua-fast) ease,background-color var(--aqua-fast) ease,transform var(--aqua-fast) var(--aqua-ease);
+}
+.header nav a::after,.editorial-header nav a::after,.service-header nav a::after,.projects-header nav a::after{
+  content:'';
+  position:absolute;
+  left:10%;
+  right:10%;
+  bottom:5px;
+  height:2px;
+  background:var(--aqua);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 190ms var(--aqua-ease);
+}
+@media(hover:hover) and (pointer:fine){
+  .header nav a:hover,.editorial-header nav a:hover,.service-header nav a:hover,.projects-header nav a:hover,.phone:hover{color:#fff}
+  .header nav a:hover::after,.editorial-header nav a:hover::after,.service-header nav a:hover::after,.projects-header nav a:hover::after{transform:scaleX(1)}
+}
+.header nav a[aria-current="page"]::after,.editorial-header nav a[aria-current="page"]::after,.service-header nav a[aria-current="page"]::after,.projects-header nav a[aria-current="page"]::after{transform:scaleX(1);background:var(--chartreuse)}
+
+/* Homepage service cards: stronger intent feedback, still restrained. */
+.service-card-link{
+  transition:transform var(--aqua-medium) var(--aqua-ease),border-color var(--aqua-medium) ease,box-shadow var(--aqua-medium) ease;
+}
+.service-card-link i{transition:transform var(--aqua-fast) var(--aqua-ease),color var(--aqua-fast) ease}
+@media(hover:hover) and (pointer:fine){
+  .service-card-link:hover,.service-card-link:focus-visible{
+    z-index:3;
+    transform:translateY(-4px);
+    border-color:var(--chartreuse-border);
+    box-shadow:0 18px 34px rgba(0,15,24,.28);
+  }
+  .service-card-link:hover i,.service-card-link:focus-visible i{transform:translateX(4px);color:var(--chartreuse)}
+}
+.service-card-link:active{transform:translateY(-1px) scale(.992)}
+.service-card-link:focus-visible{outline:3px solid var(--chartreuse);outline-offset:-3px}
+
+/* Subtle pointer-following light on photographic cards. It only exists on fine pointers
+   and is removed entirely for reduced motion/touch. */
+.aqua-pointer-card{--aqua-pointer-x:50%;--aqua-pointer-y:50%}
+.service-card.aqua-pointer-card::before,
+.results-showcase-card.aqua-pointer-card::before{
+  content:'';
+  position:absolute;
+  z-index:2;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  background:radial-gradient(circle at var(--aqua-pointer-x) var(--aqua-pointer-y),rgba(92,224,243,.18),transparent 34%);
+  transition:opacity 180ms ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .service-card.aqua-pointer-card:hover::before,
+  .results-showcase-card.aqua-pointer-card:hover::before{opacity:1}
+}
+.service-card.aqua-pointer-card>*:not(img){z-index:3}
+.results-showcase-card.aqua-pointer-card>*{position:relative;z-index:3}
+
+/* Project cards get a small caption/arrow response instead of more movement. */
+.results-showcase-card:active{transform:translateY(-1px) scale(.994)}
+.results-showcase-card:focus-visible{outline:3px solid var(--chartreuse);outline-offset:3px}
+
+/* FAQ/details affordance: the row reacts before opening, and open state is obvious. */
+:where(.common-questions,.house-washing-faq,.faq-grid) details{
+  transition:background-color var(--aqua-fast) ease,border-color var(--aqua-fast) ease,box-shadow var(--aqua-fast) ease;
+}
+:where(.common-questions,.house-washing-faq,.faq-grid) summary{
+  transition:color var(--aqua-fast) ease,transform var(--aqua-fast) var(--aqua-ease);
+}
+@media(hover:hover) and (pointer:fine){
+  :where(.common-questions,.house-washing-faq,.faq-grid) details:hover{background:rgba(255,255,255,.34)}
+  :where(.common-questions,.house-washing-faq,.faq-grid) summary:hover{transform:translateX(3px)}
+}
+:where(.common-questions,.house-washing-faq,.faq-grid) details[open]{box-shadow:inset 3px 0 0 var(--chartreuse)}
+:where(.common-questions,.house-washing-faq,.faq-grid) summary:focus-visible{outline:2px solid var(--chartreuse);outline-offset:4px}
+
+/* Forms feel responsive before submission. */
+:where(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="file"]){
+  transition:border-color var(--aqua-fast) ease,box-shadow var(--aqua-fast) ease,background-color var(--aqua-fast) ease;
+}
+:where(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="file"]):hover{border-color:#6f999d}
+:where(input,textarea,select):not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus{
+  border-color:#08768d;
+  box-shadow:0 0 0 3px rgba(40,203,230,.16);
+  outline:0;
+}
+.service-options label,.photo-picker{
+  transition:transform var(--aqua-fast) var(--aqua-ease),border-color var(--aqua-fast) ease,background-color var(--aqua-fast) ease,box-shadow var(--aqua-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .service-options label:hover,.photo-picker:hover{transform:translateY(-2px);border-color:#08768d;box-shadow:0 8px 18px rgba(4,36,47,.09)}
+}
+
+/* Service-area controls feel like one connected instrument panel. */
+.service-map-list button,.service-map-reset,.maplibre-map-shell .maplibregl-ctrl-group button{
+  transition:transform var(--aqua-fast) var(--aqua-ease),background-color var(--aqua-fast) ease,border-color var(--aqua-fast) ease,color var(--aqua-fast) ease,box-shadow var(--aqua-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .service-map-list button:hover,.service-map-reset:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(0,0,0,.18)}
+  .maplibre-map-shell .maplibregl-ctrl-group button:hover{background:#0c4253;filter:none;transform:none;box-shadow:none}
+}
+.service-map-list button:active,.service-map-reset:active{transform:translateY(0) scale(.98)!important}
+.service-map-list button.is-active{animation:aqua-map-selection 300ms var(--aqua-ease)}
+.service-map-canvas{transition:border-color var(--aqua-medium) ease,box-shadow var(--aqua-medium) ease}
+.service-map-canvas:focus-within{border-color:var(--aqua);box-shadow:0 22px 48px rgba(0,0,0,.28),0 0 0 3px rgba(40,203,230,.12)}
+@keyframes aqua-map-selection{0%{box-shadow:inset 0 0 0 var(--lime)}55%{box-shadow:inset 5px 0 0 var(--lime)}100%{box-shadow:inset 3px 0 0 var(--lime)}}
+
+/* Scroll reveals are deliberately shallow. The page never flies in or parallax-scrolls. */
+.aqua-interactions-ready [data-aqua-reveal],
+.aqua-interactions-ready [data-aqua-stagger]{
+  opacity:0;
+  transform:translateY(8px);
+  transition:
+    opacity 280ms var(--aqua-ease),
+    transform 280ms var(--aqua-ease);
+  transition-delay:var(--aqua-stagger-delay,0ms);
+  will-change:opacity,transform;
+}
+.aqua-interactions-ready [data-aqua-reveal].is-aqua-visible,
+.aqua-interactions-ready [data-aqua-stagger].is-aqua-visible{
+  opacity:1;
+  transform:none;
+  will-change:auto;
+}
+
+/* Loaded hero copy has one calm entrance so the first screen feels intentional. */
+@media(prefers-reduced-motion:no-preference){
+  .hero .hero-content{animation:aqua-hero-enter 520ms var(--aqua-ease) both}
+  .hero .hero-proof{animation:aqua-hero-proof-enter 520ms 110ms var(--aqua-ease) both}
+  @keyframes aqua-hero-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes aqua-hero-proof-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+
+/* Touch gets press feedback, not sticky hover simulations. */
+@media(hover:none),(pointer:coarse){
+  :where(.cta,.secondary,.menu-call,.dock-estimate,.dock-call,.case-index-home,.project-secondary,.location-secondary):active,
+  .service-card-link:active,
+  .results-showcase-card:active{transform:scale(.985)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important}
+  button,.cta,.secondary,.service-card-link,.results-showcase-card,
+  .header nav a,.editorial-header nav a,.service-header nav a,.projects-header nav a,
+  .service-map-list button,.service-map-reset,.service-options label,.photo-picker,
+  [data-aqua-reveal],[data-aqua-stagger]{transition:none!important;animation:none!important}
+  .aqua-interactions-ready [data-aqua-reveal],.aqua-interactions-ready [data-aqua-stagger]{opacity:1;transform:none}
+  .cta::after,.service-card.aqua-pointer-card::before,.results-showcase-card.aqua-pointer-card::before{display:none}
+}
+
+@media print{
+  [data-aqua-reveal],[data-aqua-stagger]{opacity:1!important;transform:none!important;transition:none!important}
+  .cta::after{display:none!important}
+}
+
+/* Phase 36.65 — interaction + responsive QA authority.
+   This pass fills the remaining interaction gaps and hardens touch/keyboard behavior
+   without introducing looping motion, parallax, or layout-shifting effects. */
+
+/* Text-forward actions should still feel clickable even when they are not boxed CTAs. */
+:where(
+  .text-action,.service-map-page-link,.estimate-home-link,
+  .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a,
+  .case-index-home,.case-index-links a
+){
+  transition:
+    color var(--aqua-fast) ease,
+    background-color var(--aqua-fast) ease,
+    border-color var(--aqua-fast) ease,
+    text-decoration-color var(--aqua-fast) ease,
+    transform var(--aqua-fast) var(--aqua-ease);
+  text-underline-offset:.2em;
+}
+:where(.service-map-page-link) span[aria-hidden="true"]{
+  display:inline-block;
+  transition:transform var(--aqua-fast) var(--aqua-ease),color var(--aqua-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(
+    .text-action,.service-map-page-link,.estimate-home-link,
+    .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a,
+    .case-index-home,.case-index-links a
+  ):hover{
+    transform:translateX(3px);
+    text-decoration-thickness:.12em;
+  }
+  .service-map-page-link:hover span[aria-hidden="true"]{
+    transform:translateX(4px);
+  }
+}
+:where(
+  .text-action,.service-map-page-link,.estimate-home-link,
+  .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a,
+  .case-index-home,.case-index-links a
+):active{transform:translateX(1px) scale(.99)}
+:where(
+  .text-action,.service-map-page-link,.project-proof-link,.location-project-link,
+  .owner-secondary,.common-questions-cta,.estimate-process-cta,.proposal-secondary,
+  .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a
+):focus-visible{
+  outline:2px solid var(--chartreuse);
+  outline-offset:4px;
+}
+
+/* Branding is a home control, but should stay much quieter than content cards. */
+.mark img,.mark-static img{
+  transition:transform var(--aqua-medium) var(--aqua-ease),filter var(--aqua-medium) ease;
+  transform-origin:left center;
+}
+@media(hover:hover) and (pointer:fine){
+  a.mark:hover img,a.mark-static:hover img{transform:scale(1.018);filter:brightness(1.08)}
+}
+a.mark:active img,a.mark-static:active img{transform:scale(.992)}
+a.mark:focus-visible,a.mark-static:focus-visible{outline:2px solid var(--aqua);outline-offset:4px}
+
+/* Utility controls respond through surface/color first; they do not need large movement. */
+.menu-toggle,.review-shuffle,.case-index-toggle,.project-filter-chips button,
+.project-photo-thumbnails button,.project-photo-dialog button{
+  touch-action:manipulation;
+}
+@media(hover:hover) and (pointer:fine){
+  .menu-toggle:hover{border-color:var(--aqua);background:#0a3444;color:#fff}
+  .menu-toggle:hover>span:first-child{transform:scale(1.08)}
+  .case-index-toggle:hover{transform:none;box-shadow:none;background:#0a3041}
+  .project-photo-dialog button:hover{transform:none;box-shadow:none}
+}
+.menu-toggle>span:first-child{display:inline-block;transition:transform var(--aqua-fast) var(--aqua-ease)}
+.case-index-toggle:active,.project-photo-dialog button:active{transform:scale(.985)!important}
+.proposal-secondary{
+  position:relative;
+  transition:transform var(--aqua-fast) var(--aqua-ease),box-shadow var(--aqua-fast) var(--aqua-ease),border-color var(--aqua-fast) ease,color var(--aqua-fast) ease,background-color var(--aqua-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){.proposal-secondary:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(2,24,34,.2)}}
+.proposal-secondary:active{transform:translateY(0) scale(.985);box-shadow:none}
+.proposal-secondary:focus-visible{outline:2px solid var(--chartreuse);outline-offset:3px;box-shadow:var(--aqua-focus)}
+.project-filter-chips button[aria-pressed="true"],
+.project-filter-chips button.active{
+  box-shadow:inset 0 -3px 0 var(--chartreuse);
+}
+
+/* Disclosure controls get a consistent mechanical cue. */
+:where(.common-questions,.faq-grid,.house-washing-faq) summary::after,
+.faq-grid summary>span,
+.proposal-boundary-details>summary i,
+.case-disclosure>summary i,
+.term-help>summary span{
+  transition:transform var(--aqua-fast) var(--aqua-ease),border-color var(--aqua-fast) ease,color var(--aqua-fast) ease,background-color var(--aqua-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+  :where(.common-questions,.faq-grid,.house-washing-faq) summary:hover::after,
+  .faq-grid summary:hover>span{
+    border-color:var(--chartreuse);
+    color:var(--chartreuse);
+    transform:scale(1.06);
+  }
+}
+.common-questions details[open] summary::after{transform:scale(.96)}
+.faq-grid details[open] summary>span{transform:rotate(45deg)}
+
+/* Mobile dock is persistent navigation: give it press feedback without moving its geometry. */
+.mobile-dock a{transition:background-color var(--aqua-fast) ease,color var(--aqua-fast) ease,filter var(--aqua-fast) ease}
+.mobile-dock a:active{filter:brightness(.9)}
+.mobile-dock a:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+
+/* Keep controls large enough and prevent active arrows/labels from colliding on touch. */
+@media(max-width:760px){
+  :where(
+    .text-action,.service-map-page-link,.estimate-home-link,
+    .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a
+  ){
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+  }
+  :where(.common-questions,.faq-grid,.house-washing-faq) summary{min-height:56px;touch-action:manipulation}
+  .service-map-list button{padding-right:30px!important}
+  .service-map-copy strong{font-size:clamp(27px,8.8vw,38px);overflow-wrap:normal;word-break:normal}
+  .project-photo-dialog-actions,.project-photo-dialog-controls{flex-wrap:wrap}
+  .project-photo-dialog button{min-height:44px}
+  .project-filter-chips button,.review-shuffle,.menu-toggle,.case-index-toggle{min-height:44px}
+  .local-area-actions,.editorial-actions,.hero-actions{row-gap:10px}
+}
+
+@media(max-width:420px){
+  .service-map-copy{gap:7px}
+  .service-map-page-link,.service-map-reset{width:100%;justify-content:center}
+  .project-photo-dialog-controls{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .project-photo-dialog-controls button{width:100%}
+}
+
+@media(hover:none),(pointer:coarse){
+  /* Neutralize desktop hover leftovers on touch, then preserve intentional press states. */
+  a.mark:hover img,a.mark-static:hover img{transform:none;filter:none}
+  :where(
+    .text-action,.service-map-page-link,.estimate-home-link,
+    .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a,
+    .case-index-home,.case-index-links a
+  ):hover{transform:none}
+  :where(button,a,[role="button"]){-webkit-tap-highlight-color:rgba(191,217,91,.14)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mark img,.mark-static img,.menu-toggle>span:first-child,
+  :where(
+    .text-action,.service-map-page-link,.estimate-home-link,
+    .reviews-full-grid blockquote>a,.articles-grid a,.sitemap-groups a,
+    .case-index-home,.case-index-links a
+  ),
+  :where(.common-questions,.faq-grid,.house-washing-faq) summary::after,
+  .faq-grid summary>span,.proposal-boundary-details>summary i,.case-disclosure>summary i,.term-help>summary span,
+  .mobile-dock a{transition:none!important}
+}
+
+/* Phase 36.84 — navigation dropdown triggers are persistent controls, not
+   floating action buttons. Keep feedback in the underline/chevron system. */
+@media(hover:hover) and (pointer:fine){
+  .nav-group-trigger:hover{transform:none!important;filter:none!important;box-shadow:none!important;color:#fff}
+}
+.nav-group-trigger:active{transform:none!important}
+
+
+/* Phase 37.82 — project gallery controls are persistent UI, never scroll-reveal content. */
+.aqua-interactions-ready .project-photo-thumbnails button[data-aqua-stagger]{
+  opacity:1!important;
+  transform:none!important;
+  will-change:auto!important;
+}

@@ -1,0 +1,421 @@
+/* Phase 36.47 — homepage cleanse + CRAP authority layer.
+   Keep homepage composition here so historical App.css patches cannot silently regress it. */
+
+:root{
+  --home-max:1500px;
+  --home-gutter:clamp(22px,5vw,76px);
+  --home-copy:620px;
+}
+
+/* HERO — one focal message, one primary action, restrained supporting proof. */
+.site>main>.hero{
+  position:relative;
+  min-height:clamp(540px,42vw,620px);
+  height:auto;
+  max-width:var(--home-max);
+  margin:0 auto;
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid var(--line);
+  background:#061d2a;
+  color:#fff;
+}
+.site>main>.hero>img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:62% center;
+}
+.site>main>.hero .hero-scrim{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(90deg,rgba(2,14,21,.96) 0%,rgba(2,14,21,.82) 39%,rgba(2,14,21,.42) 62%,rgba(2,14,21,.10) 82%),
+    linear-gradient(0deg,rgba(2,14,21,.82) 0%,rgba(2,14,21,0) 35%);
+}
+.site>main>.hero .hero-content{
+  position:relative;
+  z-index:2;
+  top:auto;
+  left:auto;
+  transform:none;
+  width:min(760px,calc(100% - (2 * var(--home-gutter))));
+  max-width:none;
+  padding:clamp(64px,5.4vw,88px) 0 118px;
+  margin-left:var(--home-gutter);
+}
+.site>main>.hero .kicker{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.55rem;
+  margin:0 0 14px;
+  color:var(--aqua)!important;
+  font-size:12px;
+  line-height:1.35;
+}
+.site>main>.hero .kicker span{display:inline}
+.site>main>.hero .kicker span+span::before{content:'•';margin-right:.55rem;color:var(--chartreuse)}
+.site>main>.hero h1{
+  max-width:780px;
+  margin:0;
+  color:#f5fbfa;
+  font-family:var(--display);
+  font-size:clamp(3.45rem,6vw,6rem)!important;
+  font-weight:700;
+  line-height:.91!important;
+  letter-spacing:-.025em;
+  text-transform:none;
+  text-wrap:balance;
+}
+.site>main>.hero h1 em{
+  display:block;
+  margin-top:.08em;
+  color:var(--aqua);
+  font-style:normal;
+}
+.site>main>.hero .hero-content>p:not(.kicker){
+  max-width:var(--home-copy);
+  margin:18px 0 22px;
+  color:#d9e7e8;
+  font-size:17px;
+  line-height:1.55;
+}
+.site>main>.hero .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.site>main>.hero .hero-actions .cta,
+.site>main>.hero .hero-actions .secondary{min-height:48px}
+.site>main>.hero .hero-actions .secondary{background:rgba(4,21,31,.36);backdrop-filter:blur(3px)}
+.site>main>.hero .hero-next{display:inline-flex;align-items:center;gap:8px;margin-top:20px;color:#e6f1f0;font:800 11px/1.2 var(--sans);letter-spacing:.035em;text-decoration:none}.site>main>.hero .hero-next span{color:var(--chartreuse);font-size:18px;line-height:.6}.site>main>.hero .hero-next:hover,.site>main>.hero .hero-next:focus-visible{color:#fff;text-decoration:underline;text-underline-offset:5px}.site>main>.hero .hero-next:focus-visible{outline:2px solid var(--chartreuse);outline-offset:5px}
+.site>main>.hero .hero-proof{
+  position:absolute;
+  z-index:2;
+  left:var(--home-gutter);
+  right:var(--home-gutter);
+  bottom:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  margin:0;
+  border-top:1px solid rgba(174,211,216,.55);
+  background:rgba(3,25,37,.74);
+  backdrop-filter:blur(8px);
+}
+.site>main>.hero .hero-proof div{
+  min-width:0;
+  padding:13px 20px 14px;
+  border-top:0;
+  border-left:1px solid rgba(174,211,216,.28);
+}
+.site>main>.hero .hero-proof div:first-child{border-left:0}
+.site>main>.hero .hero-proof dt{color:#f4fbfa;font-size:14px;line-height:1.2}
+.site>main>.hero .hero-proof dd{max-width:260px;margin:5px 0 0;color:#bfd0d3;font-size:12px;line-height:1.4}
+
+/* HOMEPAGE RHYTHM — repeat the same edge, spacing and section hierarchy. */
+.site>main>:is(.trust-proof,.intro,.results,.path,.owner-trust,.customer-trust,.common-questions,.value-guide,.local-area,.final){max-width:var(--home-max)}
+.site>main>:is(.trust-proof,.intro,.owner-trust,.customer-trust,.common-questions,.value-guide,.local-area,.final){margin-top:14px}
+.site>main>.trust-proof,
+.site>main>.intro,
+.site>main>.results,
+.site>main>.path,
+.site>main>.customer-trust,
+.site>main>.common-questions,
+.site>main>.value-guide,
+.site>main>.local-area,
+.site>main>.final{padding-left:var(--home-gutter);padding-right:var(--home-gutter)}
+
+/* CRAP: long substantive headings use readable mixed-case word shapes. */
+.site>main>:is(.trust-proof,.intro,.results,.path,.owner-trust,.customer-trust,.common-questions,.value-guide,.local-area,.final) h2{
+  text-transform:none;
+  letter-spacing:-.018em;
+  text-wrap:balance;
+}
+
+/* CRAP: prevent repeated cards from drifting into one-off spacing. */
+.site>main>.service-grid{grid-template-columns:repeat(12,minmax(0,1fr))}
+.site>main>.service-grid .service-card:nth-child(-n+3){grid-column:span 4}
+.site>main>.service-grid .service-card:nth-child(n+4){grid-column:span 4}
+.site>main>.service-grid .service-card{min-width:0}
+
+/* CRAP: secondary text stays visually subordinate but comfortably readable. */
+.site>main>:is(.trust-proof,.intro,.results,.path,.owner-trust,.customer-trust,.common-questions,.value-guide,.local-area,.final) p{
+  overflow-wrap:break-word;
+}
+
+
+/* TRUST PROOF ACTIONS — the three middle rows are navigational, not static labels. */
+.site>main>.trust-proof ul{overflow:hidden}
+.site>main>.trust-proof li{padding:0!important;border-left:0!important;transition:background-color .18s ease,border-color .18s ease}
+.site>main>.trust-proof li>a{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:18px;
+  min-height:74px;
+  padding:14px 16px;
+  color:var(--ink);
+  text-decoration:none;
+  border-left:3px solid transparent;
+  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.site>main>.trust-proof .trust-proof-copy{display:block;min-width:0}
+.site>main>.trust-proof li>a b{display:block;color:#0b3543;font-size:15px;line-height:1.2}
+.site>main>.trust-proof li>a .trust-proof-copy>span{display:block;max-width:330px;margin-top:3px;color:#51666d;font-size:13px;line-height:1.4}
+.site>main>.trust-proof li>a i{
+  font-style:normal;
+  color:#0b6878;
+  font-size:20px;
+  line-height:1;
+  transform:translateX(-4px);
+  opacity:.72;
+  transition:transform .18s ease,opacity .18s ease,color .18s ease;
+}
+.site>main>.trust-proof li>a:hover,
+.site>main>.trust-proof li>a:focus-visible{
+  background:#dfe9e5;
+  border-left-color:var(--chartreuse-border);
+  transform:translateX(3px);
+}
+.site>main>.trust-proof li>a:hover i,
+.site>main>.trust-proof li>a:focus-visible i{
+  transform:translateX(0);
+  opacity:1;
+  color:#075263;
+}
+.site>main>.trust-proof li>a:focus-visible{outline:3px solid var(--chartreuse-border);outline-offset:-3px}
+.site>main>.trust-proof li>a:active{background:#d5e2dd;transform:translateX(1px)}
+
+@media(hover:none){
+  .site>main>.trust-proof li>a:hover{background:transparent;border-left-color:transparent;transform:none}
+  .site>main>.trust-proof li>a:hover i{transform:translateX(-4px);opacity:.72}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .site>main>.trust-proof li>a,
+  .site>main>.trust-proof li>a i{transition:none}
+}
+
+@media(max-width:900px){
+  :root{--home-gutter:clamp(20px,5vw,44px)}
+  .site>main>.hero{min-height:650px}
+  .site>main>.hero>img{object-position:68% center}
+  .site>main>.hero .hero-scrim{
+    background:linear-gradient(180deg,rgba(2,14,21,.32) 0%,rgba(2,14,21,.62) 34%,rgba(2,14,21,.97) 72%,rgba(2,14,21,.99) 100%);
+  }
+  .site>main>.hero .hero-content{
+    width:calc(100% - (2 * var(--home-gutter)));
+    padding:250px 0 58px;
+    margin-left:var(--home-gutter);
+  }
+  .site>main>.hero h1{max-width:660px;font-size:clamp(3rem,8.6vw,4.75rem)!important}
+  .site>main>.hero .hero-content>p:not(.kicker){max-width:580px}
+  .site>main>.hero .hero-proof{display:none}
+}
+
+@media(max-width:560px){
+  :root{--home-gutter:20px}
+  .site>main>.hero{min-height:690px;border-inline:0}
+  .site>main>.hero>img{object-position:69% 22%}
+  .site>main>.hero .hero-content{padding:clamp(205px,52vw,225px) 0 44px}
+  .site>main>.hero .kicker{display:block;margin-bottom:14px;font-size:11px}
+  .site>main>.hero .kicker span{display:block}
+  .site>main>.hero .kicker span+span{margin-top:3px}
+  .site>main>.hero .kicker span+span::before{content:none}
+  .site>main>.hero h1{font-size:clamp(2.85rem,13.5vw,3.8rem)!important;line-height:.93!important}
+  .site>main>.hero .hero-content>p:not(.kicker){margin:20px 0 24px;font-size:15px;line-height:1.5}
+  .site>main>.hero .hero-actions{display:grid;grid-template-columns:1fr;width:min(100%,340px)}
+  .site>main>.hero .hero-actions a{width:100%;justify-content:center}
+  .site>main>.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .site>main>.service-grid .service-card{grid-column:auto!important}
+}
+@media(max-width:340px){.site>main>.hero .hero-content{padding-top:190px}}
+
+@media(max-width:390px){
+  .site>main>.hero h1{font-size:clamp(2.65rem,13vw,3.25rem)!important}
+}
+
+
+@media(max-width:560px){
+  .site>main>.trust-proof li>a{min-height:68px;padding:12px 10px 12px 12px;gap:12px}
+  .site>main>.trust-proof li>a .trust-proof-copy>span{font-size:12px}
+}
+
+/* PHASE 36.56 — completed-work showcase. Equal cards replace the old staggered before/after composition. */
+.site>main>.results-showcase{
+  padding-top:72px;
+  padding-bottom:58px;
+  background:#062b3b;
+}
+.site>main>.results-showcase .results-showcase-heading{
+  align-items:end;
+  margin-bottom:28px;
+}
+.site>main>.results-showcase .results-showcase-heading h2,
+.site>main>.results-showcase .results-showcase-heading>p{color:#f4fbfa}
+.site>main>.results-showcase .results-showcase-heading>p{max-width:430px;color:#bfd0d3}
+.site>main>.results-showcase .kicker{color:#56e1f7}
+.site>main>.results-showcase .split-accent em{color:#56e1f7}
+.results-showcase-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.results-showcase-card{
+  position:relative;
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  border:1px solid #35596a;
+  background:#082f40;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 16px 34px rgba(4,36,47,.14);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.results-showcase-media{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:0;
+  overflow:hidden;
+  background:#0a2634;
+}
+.results-showcase-media::after{
+  content:'';
+  position:absolute;
+  inset:auto 0 0;
+  height:34%;
+  background:linear-gradient(180deg,transparent,rgba(2,24,34,.2));
+  pointer-events:none;
+}
+.results-showcase-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.results-showcase-copy{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:16px;
+  min-height:92px;
+  padding:17px 18px 18px;
+}
+.results-showcase-copy>span{
+  align-self:start;
+  padding-top:3px;
+  color:var(--chartreuse);
+  font:800 10px/1.25 var(--mono);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.results-showcase-copy>div{display:grid;gap:4px;min-width:0}
+.results-showcase-copy b{font:700 24px/1 var(--display);color:#fff}
+.results-showcase-copy small{color:#b8cbd0;font-size:12px;line-height:1.35}
+.results-showcase-copy i{
+  color:#56e1f7;
+  font-style:normal;
+  font-size:22px;
+  transform:translate(-3px,3px);
+  transition:transform .2s ease,color .2s ease;
+}
+.results-showcase-card:hover,
+.results-showcase-card:focus-visible{
+  transform:translateY(-4px);
+  border-color:var(--chartreuse-border);
+  box-shadow:0 22px 42px rgba(1,19,28,.28);
+  outline:none;
+}
+.results-showcase-card:hover .results-showcase-media img,
+.results-showcase-card:focus-visible .results-showcase-media img{transform:scale(1.01)}
+.results-showcase-card:hover .results-showcase-copy i,
+.results-showcase-card:focus-visible .results-showcase-copy i{transform:translate(2px,-2px);color:var(--chartreuse)}
+.results-showcase-followup{margin-top:28px}
+
+@media(max-width:1180px){
+  .results-showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:760px){
+  .site>main>.results-showcase{padding-top:48px;padding-bottom:38px}
+  .site>main>.results-showcase .results-showcase-heading{display:block;margin-bottom:20px}
+  .site>main>.results-showcase .results-showcase-heading>p{margin-top:12px}
+  .results-showcase-grid{grid-template-columns:1fr;gap:14px}
+  .results-showcase-copy{grid-template-columns:minmax(0,1fr) auto;min-height:82px;padding:14px 15px}
+  .results-showcase-copy>span{grid-column:1/-1;padding-top:0;margin-bottom:-5px}
+  .results-showcase-copy b{font-size:22px}
+  .results-showcase-followup{margin-top:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .results-showcase-card,.results-showcase-media img,.results-showcase-copy i{transition:none}
+}
+
+
+/* Phase 37.91 — authoritative mobile homepage edge contract.
+   Keep homepage hero geometry here; do not repair this component from App.css. */
+@media(max-width:760px){
+  .site>main>.home-story-hero .hero-content{
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    transform:none!important;
+    box-sizing:border-box;
+    width:calc(100% - (2 * var(--home-gutter)))!important;
+    max-width:760px!important;
+    margin-left:var(--home-gutter)!important;
+    margin-right:var(--home-gutter)!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  .site>main>.home-story-hero .hero-content>h1,
+  .site>main>.home-story-hero .hero-content>p,
+  .site>main>.home-story-hero .hero-actions,
+  .site>main>.home-story-hero .hero-next{
+    max-width:100%;
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+  .site>main>.home-story-hero .hero-actions{
+    box-sizing:border-box;
+  }
+}
+@media(max-width:560px){
+  .site>main>.home-story-hero .hero-actions{
+    width:min(100%,340px)!important;
+  }
+  .site>main>.home-story-hero .hero-actions a{
+    box-sizing:border-box;
+    max-width:100%;
+  }
+}
+@media(max-width:360px){
+  .site>main>.owner-trust h2{
+    max-width:100%;
+    font-size:clamp(38px,12.5vw,44px);
+    line-height:.96;
+    overflow-wrap:anywhere;
+  }
+}
+
+/* Phase 39.9E — authoritative short-phone homepage fold adjustment.
+   Keep this in homepage.css because this file owns homepage mobile geometry. */
+@media(max-width:360px) and (max-height:620px){
+  .site>main>.home-story-hero .hero-content{
+    padding-top:170px!important;
+  }
+}
+/* Phase 39.9F — 320×568 homepage lead-start closure.
+   Preserve the existing message and H1 position; reduce only the inter-paragraph
+   gap so the substantive supporting copy begins inside the usable fold. */
+@media(max-width:360px) and (max-height:620px){
+  .site>main>.home-story-hero .hero-content>p.home-hero-invitation + p{
+    margin-top:0!important;
+  }
+}

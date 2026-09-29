@@ -1,0 +1,3 @@
+# Private speculative concept. Keep crawlers out so this demo cannot compete with AquaBlast's live site.
+User-agent: *
+Disallow: /

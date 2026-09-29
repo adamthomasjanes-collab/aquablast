@@ -1,0 +1,5 @@
+# AquaBlast production robots policy generated from the Phase 39.7 launch contract.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.aquablastpw.com/sitemap.xml

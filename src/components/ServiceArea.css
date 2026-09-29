@@ -1,0 +1,71 @@
+/* Service-area module: one authoritative MapLibre implementation. */
+.local-area{display:grid;grid-template-columns:.82fr 1.18fr;gap:0;padding:0;background:#082b3b;color:#fff;border:1px solid var(--line)}
+.local-area::after{display:none}
+.local-area-intro{padding:clamp(54px,6vw,82px) clamp(25px,5vw,70px);border-right:1px solid #31515c}
+.local-area-intro h2{max-width:680px;color:#fff}
+.local-area-intro>p:not(.kicker){max-width:590px;margin:18px 0 24px;color:#c6d8da;font-size:16px;line-height:1.55}
+.local-area-actions{display:flex;flex-wrap:wrap;gap:10px}
+.local-area-link{color:#fff;border-color:#698c95;background:rgba(4,24,34,.26)}
+.local-area-link span{color:var(--aqua)}
+.service-map-wrap{min-width:0;padding:clamp(32px,4vw,48px);background:#061f2c}
+.service-map-copy{display:grid;grid-template-columns:1fr auto;gap:5px 16px;align-items:end;margin-bottom:16px}
+.service-map-copy .local-area-label{grid-column:1/-1;margin:0;color:#7cdceb;font:800 11px/1.3 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.service-map-copy strong{font:700 clamp(28px,3vw,42px)/.95 var(--display);text-transform:uppercase;color:#fff}
+.service-map-copy span{align-self:center;color:#bcd1d5;font-size:13px}
+.service-map-copy small{grid-column:1/-1;color:#8faab0;font-size:12px}
+.service-map-page-link{grid-column:1/-1;justify-self:start;margin-top:7px;color:#fff;font-weight:800;font-size:12px;text-decoration:none}
+.service-map-page-link span{color:var(--aqua)}
+.service-map-canvas.maplibre-map-shell{position:relative;min-height:450px;overflow:hidden;border:1px solid #345d6a;background:#0a2b38;box-shadow:0 22px 48px rgba(0,0,0,.28);isolation:isolate}
+.service-map-canvas.maplibre-map-shell.is-ready{border-color:#4d7580}
+.maplibre-map{position:absolute;inset:0;width:100%;height:100%}
+.maplibre-map .maplibregl-canvas{filter:saturate(.78) contrast(.96) brightness(.94)}
+.service-map-depth{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(2,23,35,.12),transparent 22%,transparent 70%,rgba(2,23,35,.18));box-shadow:inset 0 0 0 1px rgba(126,221,235,.08),inset 0 -55px 90px rgba(4,30,43,.13)}
+.service-map-status{position:absolute;z-index:4;left:18px;bottom:18px;max-width:330px;padding:10px 12px;border:1px solid #557883;background:rgba(3,27,39,.92);color:#d8e7e8;font:700 12px/1.35 system-ui,sans-serif}
+.service-map-error{border-color:#8faab0}
+.maplibre-map-shell .maplibregl-ctrl-group{overflow:hidden;border:1px solid #315968;border-radius:0;background:#061f2c;box-shadow:0 7px 18px rgba(0,0,0,.24)}
+.maplibre-map-shell .maplibregl-ctrl-group button{width:38px;height:38px;background-color:#061f2c}
+.maplibre-map-shell .maplibregl-ctrl-group button+button{border-top:1px solid #315968}
+.maplibre-map-shell .maplibregl-ctrl-icon{filter:invert(1) brightness(1.8)}
+.maplibre-map-shell .maplibregl-ctrl-attrib{background:rgba(244,247,243,.9);color:#173e48;font-size:10px}
+.maplibre-map-shell .maplibregl-cooperative-gesture-screen{background:rgba(2,23,35,.78);color:#fff;font-weight:700}
+.service-map-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.service-map-list button{min-height:44px;padding:8px 10px;border:1px solid #456b75;background:#082b3b;color:#d6e5e6;font:700 11px/1.2 system-ui,sans-serif;cursor:pointer}
+.service-map-list button:hover,.service-map-list button:focus-visible{border-color:var(--aqua);background:#0a3a4d;color:#fff}
+.service-map-list button.is-active{border-color:var(--lime);background:#0d4050;color:#fff;box-shadow:inset 3px 0 0 var(--lime)}
+.service-map-list button:focus-visible,.service-map-reset:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.service-map-reset{grid-column:1/-1;justify-self:start;min-height:44px;margin-top:7px;padding:8px 10px;border:1px solid #557883;background:transparent;color:#d6e5e6;font:800 11px/1.2 system-ui,sans-serif;cursor:pointer}
+.service-map-reset:hover,.service-map-reset:focus-visible{border-color:var(--aqua);background:#0a3a4d;color:#fff}
+.service-map-reset:disabled{cursor:wait;opacity:.55;border-color:#45616a;background:#082b3b;color:#9eb2b6}
+.service-map-reset:disabled:hover{border-color:#45616a;background:#082b3b;color:#9eb2b6}
+
+@media(max-width:980px){.local-area{grid-template-columns:1fr}.local-area-intro{border-right:0;border-bottom:1px solid #31515c}}
+@media(max-width:760px){.local-area-intro,.service-map-wrap{padding:42px 20px}.local-area-intro h2{font-size:50px}.service-map-copy{grid-template-columns:1fr}.service-map-copy span{align-self:auto}.service-map-copy small{max-width:32rem;line-height:1.4}.service-map-canvas.maplibre-map-shell{min-height:390px}.service-map-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.service-map-list button{min-height:44px;padding:9px 10px;font-size:11px;text-align:left}.maplibre-map-shell .maplibregl-ctrl-group button{width:42px;height:42px}}
+@media(max-width:430px){.service-map-list{grid-template-columns:1fr}.service-map-canvas.maplibre-map-shell{min-height:360px}}
+
+/* Phase 34.14 — map-control readability and breathing room. */
+.service-map-list button{min-height:44px;padding:11px 13px;font-size:12px;line-height:1.4}
+.service-map-copy span{font-size:13px;line-height:1.45}
+.service-map-reset{min-height:44px;padding:10px 13px;font-size:12px}
+
+/* Phase 35.1 — keep important live local-search pathways crawlable without turning the homepage into a keyword list. */
+.local-area-featured { margin-top: 1rem; font-size: .92rem; line-height: 1.6; }
+.local-area-featured > span:first-child { font-weight: 700; }
+.local-area-featured a { color: inherit; text-underline-offset: .18em; }
+.local-area-featured a:hover, .local-area-featured a:focus-visible { color: var(--cyan, #00ccea); }
+
+/* A self-contained coverage diagram is deliberately used instead of third-party map tiles.
+   It remains usable when a tile host, CSP, network, or GPU context is unavailable. */
+.service-coverage-map{position:relative;min-height:450px;overflow:hidden;border:1px solid #4d7580;background:linear-gradient(148deg,#0d3848 0%,#082b3b 53%,#061f2c 100%);box-shadow:0 22px 48px rgba(0,0,0,.28);isolation:isolate}
+.service-coverage-map svg{display:block;position:absolute;inset:0;width:100%;height:100%}
+.service-map-lake{fill:#0b526a;opacity:.82}.service-map-shore{fill:none;stroke:#83d9e7;stroke-width:.55;opacity:.82}.service-map-route{fill:none;stroke:#5e94a0;stroke-width:.38;stroke-dasharray:1.25 1.2;opacity:.62}.service-map-lake-label{fill:#b8edf4;font:700 3.4px/1 system-ui,sans-serif;letter-spacing:.7px}
+.service-map-point{cursor:pointer;outline:none}.service-map-point-halo{fill:rgba(0,204,234,.16);stroke:rgba(124,220,235,.42);stroke-width:.35;transition:fill .18s ease,stroke .18s ease}.service-map-point-core{fill:#08768d;stroke:#f4f7f3;stroke-width:.65;transition:fill .18s ease,stroke .18s ease}.service-map-point:hover .service-map-point-halo,.service-map-point:focus .service-map-point-halo,.service-map-point.is-selected .service-map-point-halo{fill:rgba(191,217,91,.24);stroke:#bfd95b}.service-map-point:hover .service-map-point-core,.service-map-point:focus .service-map-point-core,.service-map-point.is-selected .service-map-point-core{fill:#bfd95b;stroke:#062735}.service-map-point:focus .service-map-point-core{stroke:#fff;stroke-width:1.05}.service-map-point-label{fill:#fff;font:700 3px/1 system-ui,sans-serif;paint-order:stroke;stroke:#052a37;stroke-width:1.35px;stroke-linejoin:round}
+.service-map-key{position:absolute;z-index:3;left:18px;bottom:18px;max-width:300px;margin:0;padding:10px 12px;border:1px solid #557883;background:rgba(3,27,39,.9);color:#d8e7e8;font:700 12px/1.35 system-ui,sans-serif}.service-map-key span{display:inline-block;width:9px;height:9px;margin-right:7px;border:2px solid #f4f7f3;border-radius:50%;background:#08768d;vertical-align:-1px}
+@media(max-width:760px){.service-coverage-map{min-height:390px}.service-map-key{left:14px;right:14px;bottom:14px;max-width:none}}
+@media(max-width:430px){.service-coverage-map{min-height:360px}}
+
+/* Phase 36.62 — tactile map feedback. */
+.service-map-list button{position:relative;overflow:hidden;padding-right:28px}
+.service-map-list button::after{content:'→';position:absolute;right:10px;top:50%;color:var(--aqua);opacity:0;transform:translate(-5px,-50%);transition:opacity .16s ease,transform .16s ease,color .16s ease}
+.service-map-list button:hover::after,.service-map-list button:focus-visible::after,.service-map-list button.is-active::after{opacity:1;transform:translate(0,-50%)}
+.service-map-list button.is-active::after{color:var(--lime)}
+@media(prefers-reduced-motion:reduce){.service-map-list button::after{transition:none}.service-map-list button.is-active{animation:none}}

@@ -1,0 +1,615 @@
+/* Phase 36.67 — global contrast + type-legibility authority layer.
+   Loaded after the complete App dependency tree so it can correct historical
+   cascade collisions without reopening older layout phases.
+
+   Contract:
+   - normal text: >= 4.5:1 against its actual surface
+   - large text / meaningful UI boundaries: >= 3:1 where WCAG permits
+   - substantive copy: >= 14px
+   - compact labels / metadata / controls: >= 12px
+   - text over imagery must also be visually checked in-browser because a
+     static color pair cannot prove contrast over every pixel of a photograph.
+*/
+
+:root{
+  --ab-text-on-dark:#d7e5e7;
+  --ab-muted-on-dark:#b8c9cc;
+  --ab-accent-on-dark:#8ee9f4;
+  --ab-text-on-light:#284a53;
+  --ab-muted-on-light:#536a70;
+  --ab-accent-on-light:#075d72;
+  --ab-heading-on-light:#082a3c;
+  --ab-light-surface:#f4f6f2;
+  --ab-soft-light-surface:#dbe8e4;
+}
+
+/* ---------- Project-wide type floor ---------- */
+/* Do not flatten intentionally larger body copy. The authority layer targets
+   compact roles that were actually at risk of becoming unreadable. */
+
+/* Metadata can be compact, but not microscopic. */
+:is(
+  .concept-bar,.kicker,.status,small,figcaption,
+  .case-index-home,.case-index-links a,.case-index-toggle,
+  .case-current-site-source,.case-note,.image-audit-status,
+  .owner-source,.local-area-label,.location-header-note,
+  .project-list-meta,.project-archive-caption,.quiet-note,
+  .service-map-status,.reviews-motion-note,.legal-note,
+  .proposal-package-label,.proposal-receipt-index,.proposal-current-source,
+  .proposal-header-meta,.proposal-term-note,.proposal-investment-note,
+  .credibility-support-label
+){
+  font-size:12px!important;
+  line-height:1.45;
+}
+
+/* Labels repeatedly used as the first line of cards/steps. */
+:is(
+  .case-next-decisions span,.case-preservation-plan span,.case-measurement-path span,
+  .case-scope-options span,.seo-assurance-grid article>span,
+  .concept-inventory-grid article>span,.proposal-compare-row>span,
+  .proposal-recommended,.proposal-package dt,.handoff b,.estimate-progress,
+  .service-card span,.service-review cite span,.house-project-records span,
+  .house-guidance-links span,.commercial-service-links span,
+  .locations-hub-grid span,.project-story-facts span,.contact-paths span
+){
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+
+/* ---------- Universal light-surface text ---------- */
+:where(
+  .trust-proof,.intro,.path,.value-guide,.guide-hero,.guide-checklist,.guide-final,
+  .service-review,.house-washing-guidance,.house-washing-faq,.location-market-context,
+  .locations-hub-preserved,.editorial-facts,.editorial-split,.editorial-callout,
+  .compact-callout,.review-library,.editorial-proof-panel,.contact-paths,.articles-grid,
+  .faq-grid,.article-body,.project-story-body,.project-story-facts,.project-story-next,
+  .service-area-band,.service-intro,.service-surfaces,.concrete-surface-guide,.gutter-problem-guide,.house-recognition-guide,.paver-project-story,
+  .proposal-packages,.proposal-support,.proposal-protected,.estimate-card,.completion
+){
+  color:var(--ab-heading-on-light);
+}
+
+:where(
+  .trust-proof,.intro,.path,.value-guide,.guide-hero,.guide-checklist,.guide-final,
+  .service-review,.house-washing-guidance,.house-washing-faq,.location-market-context,
+  .locations-hub-preserved,.editorial-facts,.editorial-split,.editorial-callout,
+  .compact-callout,.review-library,.editorial-proof-panel,.contact-paths,.articles-grid,
+  .faq-grid,.article-body,.project-story-body,.project-story-facts,.project-story-next,
+  .service-area-band,.service-intro,.service-surfaces,.concrete-surface-guide,.gutter-problem-guide,.house-recognition-guide,.paver-project-story,
+  .proposal-packages,.proposal-support,.proposal-protected,.estimate-card,.completion
+) :is(p,li,dd,address){
+  color:var(--ab-text-on-light);
+}
+
+:where(
+  .trust-proof,.intro,.path,.value-guide,.guide-hero,.guide-checklist,.guide-final,
+  .service-review,.house-washing-guidance,.house-washing-faq,.location-market-context,
+  .locations-hub-preserved,.editorial-facts,.editorial-split,.editorial-callout,
+  .compact-callout,.review-library,.editorial-proof-panel,.contact-paths,.articles-grid,
+  .faq-grid,.article-body,.project-story-body,.project-story-facts,
+  .proposal-packages,.proposal-support,.proposal-protected,.estimate-card,.completion
+) :is(.status,small,figcaption){
+  color:var(--ab-accent-on-light)!important;
+}
+
+/* ---------- Universal dark-surface text ---------- */
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.services-hub-hero,
+  .projects-hero,.locations-hub-hero,.service-hero,.service-understanding,.service-process,
+  .service-proof,.service-final,.location-hero,.location-proof,
+  .location-final,.project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .proposal-page,.case-study-curated
+) :is(.status){
+  color:var(--ab-accent-on-dark)!important;
+}
+
+/* Do not globally recolor every paragraph inside proposal/case-study because
+   both contain intentional light cards. Fix their dark-surface zones directly. */
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.services-hub-hero,
+  .projects-hero,.locations-hub-hero,.service-hero,.service-understanding,.service-process,
+  .service-proof,.service-final,.location-hero,.location-proof,
+  .location-final,.project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header
+) :is(p,li,dd,address){
+  color:var(--ab-text-on-dark);
+}
+
+/* ---------- Case-study CRAP/contrast repairs ---------- */
+/* The SEO chapter is dark on desktop. A stale light-chapter override in
+   App.css previously forced its kicker to #07546b (about 2.20:1 on the
+   chapter navy). Keep the desktop chapter label on the dark-surface token. */
+.case-study-curated .case-search>.kicker{
+  color:var(--ab-accent-on-dark)!important;
+}
+
+/* Keep the SEO summary copy on its actual surface: dark cards on desktop,
+   white cards in the narrow-screen light chapter. Do not broaden this rule to
+   later preservation-plan cards. */
+.case-study-curated .case-search-summary>p{
+  color:var(--ab-text-on-dark);
+}
+.commercial-service-directory__intro>p{color:#415b60}
+.locations-hub-featured>.section-heading>p{color:#415b60}
+
+/* Screenshot regression: the light A/B-testing callout was inheriting the dark
+   case-study paragraph color through a more specific historical selector. */
+.case-study-curated .case-validation .case-validation-note{
+  color:#38555c!important;
+  background:#edf2ef!important;
+  font-size:14px!important;
+  line-height:1.65!important;
+}
+.case-study-curated .case-validation .case-validation-note b{color:#092f3c!important}
+
+/* Desktop close is a dark chapter. Its light-surface accent rules previously
+   produced dark-blue kickers/body copy on navy. */
+.case-study-curated .case-next>.kicker,
+.case-study-curated .case-next .case-scope-intro>.kicker{
+  color:var(--ab-accent-on-dark)!important;
+}
+.case-study-curated .case-next>h2,
+.case-study-curated .case-next .case-scope-intro>h3{
+  color:#f4fbfa!important;
+}
+.case-study-curated .case-next .case-scope-intro>p:not(.kicker){
+  color:#c7d8da!important;
+  font-size:15px!important;
+  line-height:1.68!important;
+}
+.case-study-curated .case-next>.case-note{
+  color:#a9bdc2!important;
+  font-size:12px!important;
+  line-height:1.55!important;
+}
+.case-study-curated .case-next-decisions span,
+.case-study-curated .case-preservation-plan span,
+.case-study-curated .case-measurement-path span,
+.case-study-curated .case-scope-options span{
+  color:var(--ab-accent-on-light)!important;
+}
+.case-study-curated .case-next-decisions p,
+.case-study-curated .case-preservation-plan p,
+.case-study-curated .case-measurement-path p,
+.case-study-curated .case-scope-options p{
+  color:#405d64!important;
+  font-size:14px!important;
+}
+.case-study-curated .case-next-decisions b,
+.case-study-curated .case-preservation-plan b,
+.case-study-curated .case-measurement-path b,
+.case-study-curated .case-scope-options b{
+  color:#092f3c!important;
+}
+
+/* Keep the dark meeting brief readable even when nested inside a mixed-surface
+   case-study chapter. */
+.case-study-curated .case-meeting-brief>.kicker{color:var(--ab-accent-on-dark)!important}
+.case-study-curated .case-meeting-brief :is(p,li){color:#d2e1e2!important;font-size:14px!important}
+.case-study-curated .case-meeting-brief h3,
+.case-study-curated .case-meeting-brief li b{color:#fff!important}
+
+/* Small evidence/support labels on dark case-study surfaces. */
+.case-study-curated :is(
+  .case-current-site-source,.case-note,.concept-inventory-note,.seo-assurance-note
+){
+  color:#a9bdc2!important;
+}
+
+/* ---------- Proposal mixed-surface repairs ---------- */
+/* The proposal shell is dark, but several full-width decision sections are
+   deliberately light. Keep their eyebrows out of the cyan-on-navy contract:
+   cyan is reserved for dark surfaces; the darker aqua token carries compact
+   labels over paper, white, and off-white panels. */
+.proposal-page :is(
+  .proposal-current,.proposal-plan,.proposal-nochange,.proposal-packages,
+  .proposal-support,.proposal-protected,.proposal-extension,
+  .proposal-price-confidence,.proposal-decision-summary
+) .kicker{
+  color:var(--ab-accent-on-light)!important;
+}
+.proposal-page :is(.proposal-thats-right,.proposal-decision-questions)>.kicker{
+  color:var(--ab-eyebrow-on-dark)!important;
+}
+.proposal-page :is(.proposal-package-label,.proposal-package dt,.proposal-compare-row>span){
+  color:var(--ab-accent-on-light)!important;
+}
+/* The first comparison-table row is a navy header. Its “Decision” cell is a
+   column header, not a light-row label, so it needs the dark-surface token. */
+.proposal-page .proposal-compare-head>span{
+  color:var(--ab-accent-on-dark)!important;
+}
+/* Make the recommended path read as a layered editorial ribbon rather than a
+   flat chartreuse control. The primary card alone permits the ribbon to rise
+   above its border; receipt content remains contained within the card below. */
+.proposal-package-primary{overflow:visible!important}
+.proposal-package-primary .proposal-recommended{
+  top:-18px;
+  left:18px;
+  z-index:2;
+  padding:8px 12px;
+  border:1px solid #0f7186;
+  background:linear-gradient(135deg,#0b7891,#075d72);
+  box-shadow:0 9px 18px rgba(4,36,47,.2);
+  color:#fff!important;
+}
+/* The secondary action in the light measurement/current-site chapters cannot
+   reuse the white-on-navy proposal-close treatment. */
+.proposal-current .proposal-secondary{
+  margin-top:20px;
+  border-color:#547d85!important;
+  background:#fff!important;
+  color:#082a3c!important;
+}
+.proposal-current .proposal-secondary:hover,
+.proposal-current .proposal-secondary:focus-visible{
+  border-color:#075d72!important;
+  background:#e2ece8!important;
+  color:#041e2a!important;
+}
+.proposal-page :is(.proposal-current-source,.proposal-nochange aside span){
+  color:#536a70!important;
+}
+.proposal-page :is(.proposal-deck,.proposal-assumption,.proposal-term-note,.proposal-boundary-intro,
+  .proposal-next-note,.proposal-measurement-compact p:not(.kicker)){
+  font-size:14px!important;
+  line-height:1.6!important;
+}
+
+/* ---------- Estimate completion regression ---------- */
+/* The generic .secondary rule is white for dark surfaces; on the completion
+   card that produced white type on a white button. This is the light-card
+   authority for the standalone homepage return action. */
+.completion .estimate-home-link{
+  min-height:48px;
+  border-color:#547d85!important;
+  background:#fff!important;
+  color:#082a3c!important;
+}
+.completion .estimate-home-link:hover,
+.completion .estimate-home-link:focus-visible{
+  border-color:#07546b!important;
+  background:#e2ece8!important;
+  color:#041e2a!important;
+}
+.completion .completion-boundary{
+  color:#536a70!important;
+  font-size:14px!important;
+  line-height:1.55!important;
+}
+.completion .handoff b{color:#075d72!important}
+
+/* ---------- Buttons / state contrast ---------- */
+:is(.cta,.dock-estimate){color:#162315!important}
+:is(.cta,.dock-estimate):hover,
+:is(.cta,.dock-estimate):focus-visible,
+:is(.cta,.dock-estimate):active{color:#162315!important}
+
+/* A disabled or unavailable control must still be legible. Keep state meaning
+   in border/fill/opacity, not by erasing the label. */
+:where(button,[role="button"],.secondary,.proposal-secondary):disabled,
+:where(button,[role="button"],.secondary,.proposal-secondary)[aria-disabled="true"]{
+  opacity:1;
+  color:#536a70!important;
+  border-color:#8aa0a4!important;
+  background:#e3e8e5!important;
+}
+
+/* ---------- Navigation / utility legibility ---------- */
+.header nav a,.phone{font-size:12px!important}
+.concept-bar{font-size:12px!important;line-height:1.35!important}
+/* This is a chapter index, not a horizontal carousel. Wrapping keeps every
+   destination visible on compact desktop widths and prevents the last item’s
+   hover treatment from exposing a scrollbar. Narrow screens retain the
+   explicit menu treatment defined in App.css. */
+@media(min-width:901px){
+  .case-index-links{flex:1 1 auto;flex-wrap:wrap;overflow:visible;row-gap:0}
+  .case-index-links a{transform:none!important}
+}
+.case-index-links a{font-size:12px!important}
+.case-index-home,.case-index-toggle{font-size:12px!important}
+
+/* ---------- Focus / selected-state boundary contrast ---------- */
+:where(a,button,summary,input,select,textarea):focus-visible{
+  outline-color:var(--chartreuse)!important;
+  box-shadow:0 0 0 5px rgba(4,21,31,.82)!important;
+}
+
+/* Light cards need a dark outer focus halo so chartreuse remains visible. */
+:where(.estimate-card,.completion,.proposal-packages,.proposal-support,.review-library,
+  .editorial-split,.article-body,.case-next-decisions,.case-preservation-plan,
+  .case-measurement-path,.case-scope-options)
+  :where(a,button,summary,input,select,textarea):focus-visible{
+  outline-color:#075d72!important;
+  box-shadow:0 0 0 5px rgba(255,255,255,.92)!important;
+}
+
+/* Responsive: do not undo the dark desktop close fixes on narrow screens. The
+   older mobile layer intentionally turns case-next light, so switch the text
+   contract with the surface. */
+@media(max-width:760px){
+  .case-study-curated .case-next>.kicker,
+  .case-study-curated .case-next .case-scope-intro>.kicker{color:var(--ab-accent-on-light)!important}
+  .case-study-curated .case-next>h2,
+  .case-study-curated .case-next .case-scope-intro>h3{color:var(--ab-heading-on-light)!important}
+  .case-study-curated .case-next .case-scope-intro>p:not(.kicker){color:#36545c!important}
+  .case-study-curated .case-next>.case-note{color:#536a70!important}
+}
+
+/* Phase 36.68 — case-study legibility follows the global contrast contract,
+   but substantive owner-facing notes/cards are not allowed to collapse to
+   metadata-sized copy. */
+.case-study-curated .case-note{font-size:14px!important;line-height:1.6!important}
+.case-study-curated .case-support-details>summary{font-size:13px!important;line-height:1.45!important}
+.case-study-curated figcaption{font-size:13px!important;line-height:1.5!important}
+.case-study-curated :is(
+  .case-current-site-grid p,.case-companycam-grid p,.case-at-glance p,
+  .case-photo-plan li,.image-audit-grid span:not(.image-audit-status),
+  .case-preservation-plan p,.case-measurement-path p,
+  .case-next-decisions p,.case-scope-options p,.case-optional-systems article p
+){font-size:14px!important;line-height:1.58!important}
+.case-study-curated :is(
+  .case-at-glance span,.case-current-site-grid span,.case-companycam-grid span,
+  .image-audit-grid b,.case-optional-systems article span,
+  .case-preservation-plan span,.case-measurement-path span,
+  .case-next-decisions span,.case-scope-options span
+){font-size:12px!important;line-height:1.4!important}
+.case-study-curated .image-audit-status{font-size:12px!important;line-height:1.4!important}
+
+/* ---------- Service-area dark-surface authority ---------- */
+/* `.local-area` also carries the historical generic `.area` class. Keep the
+   service-map copy bound to dark-surface tokens so generic light-surface rules
+   cannot regress it. */
+.local-area .service-map-copy small{
+  color:var(--ab-muted-on-dark)!important;
+}
+.local-area .service-map-reset:disabled{
+  opacity:1!important;
+  border-color:#557883!important;
+  background:#082b3b!important;
+  color:var(--ab-muted-on-dark)!important;
+}
+
+
+/* Phase 37.14 — LOCKED universal eyebrow/kicker contrast contract.
+   SINGLE SOURCE OF TRUTH FOR .kicker COLOR.
+   Do not assign kicker color in component CSS. Surface ownership lives here.
+   Rule: light accent on dark surfaces; dark accent on light surfaces.
+   Fallback is currentColor so an unclassified surface inherits readable text
+   instead of silently choosing the wrong theme token. */
+:root{
+  --ab-eyebrow-on-dark:#8ee9f4;
+  --ab-eyebrow-on-light:#07546b;
+}
+
+.kicker{color:currentColor!important}
+
+/* DARK SURFACES */
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.local-area,
+  .services-hub-hero,.projects-hero,.projects-featured,.locations-hub-hero,
+  .service-hero,.service-understanding,.service-process,.service-proof,.service-final,
+  .paver-hero,.paver-process-visual,
+  .location-hero,.location-proof,.location-final,
+  .project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .proposal-hero,.proposal-bridge,.proposal-value,.proposal-measurement,
+  .proposal-measurement-compact,.proposal-terms,.proposal-boundaries,.proposal-boundary-details,
+  .proposal-next,.proposal-why,
+  .case-study,.case-study-curated,.case-addendum,.case-growth-note,
+  .case-photo-plan,.case-companycam,.case-current-site,.case-meeting-brief,
+  .case-google-review-system
+) .kicker{
+  color:var(--ab-eyebrow-on-dark)!important;
+}
+
+/* LIGHT SURFACES — intentionally after the dark map so nested light panels
+   inside dark page shells always win. */
+:where(
+  .trust-proof,.intro,.path,.value-guide,.guide-hero,.guide-checklist,.guide-final,
+  .owner-trust,.customer-trust,
+  .service-intro,.service-surfaces,.service-review,.service-area-band,
+  .concrete-surface-guide,.gutter-problem-guide,.house-recognition-guide,.paver-project-story,
+  .roof-approach,.commercial-service-directory,
+  .house-washing-guidance,.house-washing-faq,
+  .location-intro,.location-services,.location-market-context,.location-quote,
+  .location-search-support,.locations-hub-preserved,
+  .editorial-facts,.editorial-split,.editorial-callout,.compact-callout,
+  .review-library,.editorial-proof-panel,.contact-paths,.articles-grid,.faq-grid,
+  .article-body,.about-owner-story,
+  .project-summary,.project-why,.project-next,.project-story-copy,.project-story-facts,
+  .project-story-body,.project-story-next,
+  .proposal-current,.proposal-plan,.proposal-nochange,.proposal-packages,.proposal-support,
+  .proposal-protected,.proposal-extension,.proposal-price-confidence,.proposal-decision-summary,
+  .estimate-card,.completion,
+  .case-journey,.case-growth,.case-next-decisions,.case-preservation-plan,.case-measurement-path,.case-scope-options,
+  .case-technical-difference,.case-scope-intro
+) .kicker{
+  color:var(--ab-eyebrow-on-light)!important;
+}
+
+/* Dark inset panels inside the light growth chapter keep a bright eyebrow. */
+.case-study-curated .case-optional-systems>.kicker,
+.case-study-curated .case-photo-plan>.kicker{
+  color:var(--ab-eyebrow-on-dark)!important;
+}
+
+/* Responsive exception: the case-study close intentionally becomes a light
+   surface on narrow screens. Keep the semantic surface rule, not a hardcoded
+   one-off color. */
+@media(max-width:760px){
+  .case-study-curated .case-search-summary>p{
+    color:var(--ab-text-on-light);
+  }
+  .case-study-curated .case-search>.kicker,
+  .case-study-curated .case-next>.kicker,
+  .case-study-curated .case-next .case-scope-intro>.kicker{
+    color:var(--ab-eyebrow-on-light)!important;
+  }
+}
+
+
+/* Phase 37.28 — LOCKED universal secondary-action contrast contract.
+   Secondary actions are surface-aware UI, not a permanently white button.
+   Default = light-surface treatment. Explicit dark-surface containers opt into
+   the inverse treatment below. This is intentionally loaded in the global
+   contrast authority so individual pages cannot silently regress it. */
+:root{
+  --ab-secondary-on-light:#082a3c;
+  --ab-secondary-border-on-light:#547d85;
+  --ab-secondary-arrow-on-light:#075d72;
+  --ab-secondary-hover-on-light:#e2ece8;
+  --ab-secondary-on-dark:#f4fbfa;
+  --ab-secondary-border-on-dark:#7ca9b6;
+  --ab-secondary-arrow-on-dark:#8ee9f4;
+  --ab-secondary-hover-on-dark:#0b3441;
+}
+
+/* LIGHT SURFACE / SAFE DEFAULT */
+.secondary{
+  color:var(--ab-secondary-on-light)!important;
+  border-color:var(--ab-secondary-border-on-light)!important;
+  background:transparent!important;
+}
+.secondary>span[aria-hidden="true"],
+.secondary>span{
+  color:var(--ab-secondary-arrow-on-light)!important;
+}
+.secondary:hover,
+.secondary:focus-visible{
+  color:#041e2a!important;
+  border-color:var(--ab-secondary-arrow-on-light)!important;
+  background:var(--ab-secondary-hover-on-light)!important;
+}
+.secondary:hover>span[aria-hidden="true"],
+.secondary:focus-visible>span[aria-hidden="true"],
+.secondary:hover>span,
+.secondary:focus-visible>span{
+  color:var(--ab-secondary-arrow-on-light)!important;
+}
+
+/* DARK SURFACES */
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.local-area,
+  .services-hub-hero,.projects-hero,.projects-featured,.locations-hub-hero,
+  .service-hero,.service-understanding,.service-process,.service-proof,.service-final,
+  .paver-hero,.paver-process-visual,
+  .location-hero,.location-proof,.location-final,
+  .project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .building-plan,.storefront-plan,.commercial-plan,.dumpster-plan,.dumpster-operations,.parking-plan,.parking-operations,.fleet-plan,.fleet-visual-break,.fleet-operations,
+  .proposal-hero,.proposal-bridge,.proposal-value,.proposal-measurement,
+  .proposal-measurement-compact,.proposal-terms,.proposal-boundaries,
+  .proposal-boundary-details,.proposal-next,.proposal-why,
+  .case-study,.case-study-curated,.case-addendum,.case-growth-note,
+  .case-photo-plan,.case-companycam,.case-current-site,.case-meeting-brief,
+  .case-google-review-system
+) .secondary{
+  color:var(--ab-secondary-on-dark)!important;
+  border-color:var(--ab-secondary-border-on-dark)!important;
+  background:transparent!important;
+}
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.local-area,
+  .services-hub-hero,.projects-hero,.projects-featured,.locations-hub-hero,
+  .service-hero,.service-understanding,.service-process,.service-proof,.service-final,
+  .paver-hero,.paver-process-visual,
+  .location-hero,.location-proof,.location-final,
+  .project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .building-plan,.storefront-plan,.commercial-plan,.fleet-plan,.fleet-visual-break,.fleet-operations
+) .secondary>span,
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.local-area,
+  .services-hub-hero,.projects-hero,.projects-featured,.locations-hub-hero,
+  .service-hero,.service-understanding,.service-process,.service-proof,.service-final,
+  .paver-hero,.paver-process-visual,
+  .location-hero,.location-proof,.location-final,
+  .project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .building-plan,.storefront-plan,.commercial-plan,.fleet-plan,.fleet-visual-break,.fleet-operations
+) .secondary>span[aria-hidden="true"]{
+  color:var(--ab-secondary-arrow-on-dark)!important;
+}
+.commercial-plan .secondary>span[aria-hidden="true"]{
+  color:var(--ab-secondary-arrow-on-dark)!important;
+}
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.local-area,
+  .services-hub-hero,.projects-hero,.projects-featured,.locations-hub-hero,
+  .service-hero,.service-understanding,.service-process,.service-proof,.service-final,
+  .paver-hero,.paver-process-visual,
+  .location-hero,.location-proof,.location-final,
+  .project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .building-plan,.storefront-plan,.commercial-plan,.fleet-plan,.fleet-visual-break,.fleet-operations
+) .secondary:hover,
+:where(
+  .hero,.results,.final,.common-questions,.owner-trust-card,.local-area,
+  .services-hub-hero,.projects-hero,.projects-featured,.locations-hub-hero,
+  .service-hero,.service-understanding,.service-process,.service-proof,.service-final,
+  .paver-hero,.paver-process-visual,
+  .location-hero,.location-proof,.location-final,
+  .project-hero,.project-result,.project-final,.project-story-detail>header,
+  .editorial-hero,.review-proof-band,.reviews-featured,.article-detail>header,
+  .building-plan,.storefront-plan,.commercial-plan,.fleet-plan,.fleet-visual-break,.fleet-operations
+) .secondary:focus-visible{
+  color:var(--ab-secondary-on-dark)!important;
+  border-color:var(--chartreuse)!important;
+  background:var(--ab-secondary-hover-on-dark)!important;
+}
+
+/* Light surface sanity locks for historically mixed shells. */
+:where(
+  .service-area-band,.service-intro,.service-surfaces,.service-review,
+  .concrete-surface-guide,.gutter-problem-guide,.house-recognition-guide,
+  .paver-project-story,.roof-approach,.commercial-service-directory,
+  .commercial-window-plan,.commercial-window-context,.commercial-window-scope,.commercial-window-method,
+  .building-recognition,.building-evidence,.building-scope,.building-operations,
+  .dumpster-recognition,.dumpster-context,.dumpster-scope,.parking-recognition,.parking-proof,.parking-scope,
+  .editorial-split,.editorial-proof-panel,.article-body,.project-story-next,
+  .location-intro,.location-services,.location-market-context,.location-quote,
+  .locations-hub-preserved,.estimate-card,.completion
+) .secondary{
+  color:var(--ab-secondary-on-light)!important;
+  border-color:var(--ab-secondary-border-on-light)!important;
+  background:transparent!important;
+}
+:where(
+  .service-area-band,.service-intro,.service-surfaces,.service-review,
+  .concrete-surface-guide,.gutter-problem-guide,.house-recognition-guide,
+  .paver-project-story,.roof-approach,.commercial-service-directory,
+  .commercial-window-plan,.commercial-window-context,.commercial-window-scope,.commercial-window-method,
+  .building-recognition,.building-evidence,.building-scope,.building-operations,
+  .dumpster-recognition,.dumpster-context,.dumpster-scope,.parking-recognition,.parking-proof,.parking-scope,
+  .editorial-split,.editorial-proof-panel,.article-body,.project-story-next,
+  .location-intro,.location-services,.location-market-context,.location-quote,
+  .locations-hub-preserved,.estimate-card,.completion
+) .secondary>span{
+  color:var(--ab-secondary-arrow-on-light)!important;
+}
+
+/* Phase 38.20 — documentary proof caption must remain legible on the dark
+   image footer even if broader proof-card typography rules change later. */
+.company-proof figcaption b{
+  color:var(--ab-text-on-dark)!important;
+}
+
+/* Public headline rule: sentence case for full titles; reserve uppercase for
+   compact kickers, navigation, and metadata. Private proposal/case-study
+   presentation pages are outside these public-page shells. */
+:is(.site,.service-page,.services-hub-page,.projects-page,.editorial-page,.estimate-shell) main :is(h1,h2,h3){
+  text-transform:none!important;
+}
+
+/* Keep both persistent mobile actions readable across the public page shells. */
+@media(max-width:1199px){
+  :is(.site,.service-page,.services-hub-page,.projects-page,.editorial-page) .mobile-dock a{
+    font-size:clamp(13px,3.6vw,16px)!important;
+  }
+  :is(.site,.service-page,.services-hub-page,.projects-page,.editorial-page) .mobile-dock .dock-call:is(:link,:visited,:hover,:focus-visible,:active){
+    color:#e9f2f2!important;
+  }
+}

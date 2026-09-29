@@ -1,0 +1,12 @@
+:root{font-family:Manrope,Arial,sans-serif;color:#081a25;background:#06131c;font-synthesis:none;text-rendering:optimizeLegibility}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px}a{color:inherit}button{font:inherit}
+
+/* Phase 34.4 accessibility baseline: consistent keyboard focus and reduced motion. */
+:where(a,button,summary,input,select,textarea):focus-visible{
+  outline:3px solid #fff;
+  outline-offset:3px;
+  box-shadow:0 0 0 5px #08758a;
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}

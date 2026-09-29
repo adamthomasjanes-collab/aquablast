@@ -1,0 +1,935 @@
+/* Phase 36.53 — owner-presentation authority layer
+   Private case study + proposal only. Loaded after historical/global CSS. */
+
+.proposal-page main,
+.case-study-curated{min-inline-size:0}
+
+/* Keep long-form explanation readable while allowing evidence to breathe. */
+.case-study-curated section>p:not(.kicker):not(.case-note):not(.case-current-site-source),
+.case-study-curated .case-intro,
+.case-study-curated .case-situation-copy{max-width:76ch}
+.case-study-curated .case-conclusion{padding-block:clamp(46px,6vw,78px)}
+.case-study-curated .case-conclusion h2{max-width:900px;text-wrap:balance}
+.case-study-curated .case-conclusion p{max-width:780px}
+.case-study-curated .case-next{border-top:1px solid #31525f}
+.case-study-curated .case-scope-intro{padding-top:8px}
+.case-study-curated .case-proposal-link{margin-top:4px}
+.case-study-curated .case-proposal-link .cta{min-height:48px;padding-inline:20px}
+
+/* Proposal: decision first, detail second. Keep cards aligned and copy measured. */
+.proposal-page .proposal-hero .proposal-deck,
+.proposal-page .proposal-current-intro,
+.proposal-page .proposal-package-intro,
+.proposal-page .proposal-price-confidence-intro,
+.proposal-page .proposal-boundary-intro,
+.proposal-page .proposal-term-note{max-width:76ch}
+.proposal-page .proposal-package-grid-two{align-items:start}
+.proposal-page .proposal-header-actions a[aria-current="location"]{border-color:var(--chartreuse);background:var(--chartreuse);color:#061b26}
+.proposal-page .proposal-package-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.proposal-page .proposal-package{min-width:0}
+.proposal-page .proposal-package-price{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;row-gap:3px;margin-top:16px}
+.proposal-page .proposal-package-price small{flex-basis:100%}
+.proposal-page .proposal-package-timeline{display:grid;row-gap:5px;margin-top:16px}
+.proposal-page .proposal-package-timeline b{line-height:1.4}
+.proposal-page .proposal-decision-summary>.proposal-current-source{box-sizing:border-box;max-width:none;margin:0;padding:16px 18px;border-top:1px solid #cad8d4;background:#f7f9f6}
+.proposal-page .proposal-package-outcome,
+.proposal-page .proposal-package-fit,
+.proposal-page .proposal-tradeoff p{max-width:64ch}
+.proposal-page .proposal-receipt-row{align-items:start}
+.proposal-page .proposal-receipt-row>div p{max-width:72ch}
+.proposal-page .proposal-next-note{max-width:760px}
+.proposal-page .proposal-actions{align-items:center}
+
+/* The recommended option should be obvious without making the second option look punitive. */
+.proposal-package-primary{box-shadow:0 18px 42px rgba(4,36,47,.16)}
+.proposal-package:not(.proposal-package-primary){box-shadow:0 10px 28px rgba(4,36,47,.09)}
+.proposal-recommended{letter-spacing:.07em}
+
+@media(max-width:760px){
+  .proposal-page .proposal-hero,
+  .proposal-page .proposal-current,
+  .proposal-page .proposal-plan,
+  .proposal-page .proposal-nochange,
+  .proposal-page .proposal-packages,
+  .proposal-page .proposal-measurement,
+  .proposal-page .proposal-terms,
+  .proposal-page .proposal-extension,
+  .proposal-page .proposal-next{padding-inline:20px}
+  .proposal-page .proposal-package-grid-two{gap:18px}
+  .proposal-page .proposal-package{padding-inline:18px}
+  .proposal-page .proposal-receipt-row{grid-template-columns:auto minmax(0,1fr);gap:10px 12px}
+  .proposal-page .proposal-receipt-row>strong{grid-column:2;justify-self:start;margin-top:2px}
+  .proposal-page .proposal-actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .proposal-page .proposal-actions a{width:100%;justify-content:center;text-align:center}
+  .case-study-curated .case-conclusion{padding-block:42px}
+  .case-study-curated .case-next{padding-top:42px}
+}
+
+/* Self-guided SEO review: distinct preparation, launch, and unknown states. */
+.case-study-curated .case-search .case-seo-status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0}
+.case-study-curated .case-search .case-seo-status-card{min-width:0;padding:22px;border:1px solid #36505b;border-top:3px solid #20c5df;background:#09212e;color:#c4d3d5}
+.case-study-curated .case-search .case-seo-status-card:nth-child(2){border-top-color:#bad657}
+.case-study-curated .case-search .case-seo-status-card:nth-child(3){border-top-color:#85aeb8}
+.case-study-curated .case-search .case-seo-status-card>span{display:block;color:#6fdaed;font:700 11px/1.35 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.case-study-curated .case-search .case-seo-status-card h3{margin:12px 0 14px;color:#fff;font:700 clamp(22px,2vw,27px)/1.08 var(--display)}
+.case-study-curated .case-search .case-seo-status-card :is(p,li){color:#d5e3e5;font-size:14px;line-height:1.55}
+.case-study-curated .case-search .case-seo-status-card p{margin:0}
+.case-study-curated .case-search .case-seo-status-card ul{margin:0;padding-left:19px}
+.case-study-curated .case-search .case-seo-status-card li+li{margin-top:11px}
+.case-study-curated .case-search .case-seo-status-card li b{display:inline;margin:0;color:#fff;font:700 inherit;letter-spacing:normal;text-transform:none}
+.case-study-curated .case-search .case-seo-status-card details{margin-top:16px;border-top:1px solid #36505b}
+.case-study-curated .case-search .case-seo-status-card summary{display:flex;justify-content:space-between;gap:12px;padding:14px 0;color:#6fdaed;font-size:14px;font-weight:700;line-height:1.4;cursor:pointer;list-style:none}
+.case-study-curated .case-search .case-seo-status-card summary::-webkit-details-marker{display:none}
+.case-study-curated .case-search .case-seo-status-card summary span{font-size:20px;line-height:1}
+.case-study-curated .case-search .case-seo-status-card details[open] summary span{transform:rotate(45deg)}
+.case-study-curated .case-search .case-seo-status-card summary:focus-visible{outline:3px solid #bad657;outline-offset:3px}
+.case-study-curated .case-search :is(.case-seo-hosting-note,.case-seo-decision-note){max-width:92ch;margin:16px 0 0;padding:15px 18px;border-left:3px solid #20c5df;background:#09212e;color:#d5e3e5;font-size:14px;line-height:1.6}
+.case-study-curated .case-search .case-seo-decision-note{border-left-color:#bad657;margin-bottom:24px}
+.case-study-curated .case-search :is(.case-seo-hosting-note,.case-seo-decision-note) b{display:inline;margin:0;color:#fff;font:700 inherit;letter-spacing:normal;text-transform:none}
+.case-study-curated .case-search .case-seo-decision-note p{margin:0;color:inherit}
+.case-study-curated .case-search .case-seo-decision-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:15px}
+.case-study-curated .case-search .case-seo-decision-options>div{min-width:0;padding:12px;border:1px solid #36505b}
+.case-study-curated .case-search .case-seo-decision-options :is(strong,span){display:block}
+.case-study-curated .case-search .case-seo-decision-options strong{color:#cce279;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.case-study-curated .case-search .case-seo-decision-options span{margin-top:5px;color:#d5e3e5;font-size:13px;line-height:1.5}
+@media(max-width:900px){.case-study-curated .case-search .case-seo-status-grid{grid-template-columns:1fr 1fr}.case-study-curated .case-search .case-seo-unknowns{grid-column:1/-1}}
+@media(max-width:760px){
+  .case-study-curated .case-search .case-seo-status-grid{grid-template-columns:1fr;gap:10px}
+  .case-study-curated .case-search .case-seo-unknowns{grid-column:auto}
+  .case-study-curated .case-search .case-seo-status-card{padding:18px;background:#fff;border-color:#cad7d4;color:#193945}
+  .case-study-curated .case-search .case-seo-status-card>span{color:#0b7287}
+  .case-study-curated .case-search .case-seo-status-card h3{color:#092f3c}
+  .case-study-curated .case-search .case-seo-status-card :is(p,li){color:#35545e}
+  .case-study-curated .case-search .case-seo-status-card li b{color:#092f3c}
+  .case-study-curated .case-search .case-seo-status-card details{border-top-color:#cad7d4}
+  .case-study-curated .case-search .case-seo-status-card summary{color:#075e72}
+  .case-study-curated .case-search :is(.case-seo-hosting-note,.case-seo-decision-note){background:#fff;color:#35545e}
+  .case-study-curated .case-search :is(.case-seo-hosting-note,.case-seo-decision-note) b{color:#092f3c}
+  .case-study-curated .case-search .case-seo-decision-options{grid-template-columns:1fr}
+  .case-study-curated .case-search .case-seo-decision-options>div{border-color:#cad7d4}
+  .case-study-curated .case-search .case-seo-decision-options strong{color:#075e72}
+  .case-study-curated .case-search .case-seo-decision-options span{color:#35545e}
+}
+@media(max-width:360px){
+  .case-study-curated .case-index-toggle span{display:none}
+  .case-study-curated .case-index-home{white-space:nowrap}
+}
+
+@media print{
+  .proposal-page .proposal-package,
+  .proposal-page .proposal-price-confidence,
+  .proposal-page .proposal-decision-summary{break-inside:avoid}
+  .proposal-page .proposal-package-grid-two{display:block}
+  .proposal-page .proposal-package+.proposal-package{margin-top:20pt}
+}
+
+/* Phase 36.68 — case-study presentation / owner-facing polish.
+   Keep the main story client-facing; move implementation bookkeeping into
+   disclosure patterns and keep compact explanatory type genuinely readable. */
+.case-study-curated .image-audit-support{margin-top:22px}
+.case-study-curated .image-audit-support .image-audit-grid{margin-top:10px}
+.case-study-curated .case-support-details>summary{font-size:13px;line-height:1.45}
+.case-study-curated .case-current-site-source{font-size:13px;line-height:1.55}
+.case-study-curated .case-note{font-size:14px;line-height:1.6}
+.case-study-curated figcaption{font-size:13px;line-height:1.5}
+.case-study-curated :is(
+  .case-at-glance span,.case-current-site-grid span,.case-companycam-grid span,
+  .image-audit-grid b,.case-optional-systems article span,
+  .case-preservation-plan span,.case-measurement-path span,
+  .case-next-decisions span,.case-scope-options span
+){font-size:12px;line-height:1.4}
+.case-study-curated :is(
+  .case-current-site-grid p,.case-companycam-grid p,.case-at-glance p,
+  .case-photo-plan li,.image-audit-grid span:not(.image-audit-status),
+  .case-preservation-plan p,.case-measurement-path p,
+  .case-next-decisions p,.case-scope-options p,.case-optional-systems article p
+){font-size:14px;line-height:1.58}
+.case-study-curated .image-audit-status{font-size:12px!important;line-height:1.4!important}
+
+@media(max-width:760px){
+  .case-study-curated .case-support-details>summary{font-size:12px}
+  .case-study-curated .case-note{font-size:14px}
+}
+
+/* Phase 36.92 — content-preserving StoryBrand migration */
+.case-content-preservation {
+  margin-top: clamp(2rem, 4vw, 4rem);
+  padding: clamp(1.25rem, 2.8vw, 2.5rem);
+  border: 1px solid color-mix(in srgb, var(--aqua-chartreuse, #d6e84a) 42%, transparent);
+  background: color-mix(in srgb, var(--aqua-navy, #071a2a) 94%, white 6%);
+}
+
+.case-content-preservation-head {
+  max-width: 58rem;
+}
+
+.case-content-preservation-head h3 {
+  margin: .35rem 0 .8rem;
+  max-width: 18ch;
+}
+
+.case-content-preservation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.case-content-preservation-grid article {
+  padding: 1.1rem;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.055);
+}
+
+.case-content-preservation-grid span {
+  display: block;
+  margin-bottom: .45rem;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--aqua-chartreuse, #d6e84a);
+}
+
+.case-content-preservation-grid b {
+  display: block;
+  margin-bottom: .45rem;
+  font-size: 1rem;
+}
+
+.case-content-preservation-grid p,
+.case-content-preservation-head > p:last-child,
+.case-content-preservation-note {
+  color: var(--aqua-dark-muted, #c4d5df);
+}
+
+.case-content-preservation-note {
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,.13);
+}
+
+@media (max-width: 760px) {
+  .case-content-preservation-grid { grid-template-columns: 1fr; }
+}
+
+/* Phase 38.02 — case-study browse-first progressive disclosure.
+   Keep Ryan's decision story visible; file the implementation reasoning underneath. */
+.case-study-curated .case-browse-guide{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1px;
+  margin:24px 0 18px;
+  border:1px solid #31525f;
+  background:#31525f;
+}
+.case-study-curated .case-browse-guide>div{padding:18px 20px;background:#eef3ef;color:#183640}
+.case-study-curated .case-browse-guide span{display:block;margin-bottom:7px;color:#0c7287;font:800 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.case-study-curated .case-browse-guide b{display:block;color:#0b2934;font:800 16px/1.25 Manrope,Arial,sans-serif}
+.case-study-curated .case-browse-guide p{margin:8px 0 0!important;color:#3e5960!important;font-size:14px!important;line-height:1.55!important}
+
+.case-study-curated .case-folder,
+.case-study-curated .case-reasoning-folder{
+  display:block;
+  margin:24px 0;
+  border:1px solid #315260;
+  background:#08212d;
+  color:#edf7f5;
+  overflow:clip;
+}
+.case-study-curated .case-folder>summary,
+.case-study-curated .case-reasoning-folder>summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  min-height:64px;
+  padding:14px 18px;
+  cursor:pointer;
+  list-style:none;
+  background:#0a2633;
+  color:#edf7f5;
+}
+.case-study-curated .case-folder>summary::-webkit-details-marker,
+.case-study-curated .case-reasoning-folder>summary::-webkit-details-marker{display:none}
+.case-study-curated .case-folder>summary>span,
+.case-study-curated .case-reasoning-folder>summary>span{display:grid;gap:4px;min-width:0}
+.case-study-curated .case-folder>summary b,
+.case-study-curated .case-reasoning-folder>summary b{color:#fff;font:800 15px/1.25 Manrope,Arial,sans-serif;text-transform:none;letter-spacing:0}
+.case-study-curated .case-folder>summary small,
+.case-study-curated .case-reasoning-folder>summary small{color:#73dceb;font:700 10px/1.35 var(--mono);letter-spacing:.055em;text-transform:uppercase}
+.case-study-curated .case-folder>summary i,
+.case-study-curated .case-reasoning-folder>summary i{
+  display:grid;
+  place-items:center;
+  flex:0 0 34px;
+  width:34px;
+  height:34px;
+  border:1px solid #51d1e6;
+  color:#51d1e6;
+  font:500 25px/1 Arial,sans-serif;
+  font-style:normal;
+  transition:transform .18s ease,background-color .18s ease,color .18s ease;
+}
+.case-study-curated .case-folder>summary:hover,
+.case-study-curated .case-reasoning-folder>summary:hover{background:#0d2b37}
+.case-study-curated .case-folder>summary:focus-visible,
+.case-study-curated .case-reasoning-folder>summary:focus-visible{outline:3px solid #51d1e6;outline-offset:-3px}
+.case-study-curated .case-folder[open]>summary,
+.case-study-curated .case-reasoning-folder[open]>summary{border-bottom:1px solid #315260}
+.case-study-curated .case-folder[open]>summary i,
+.case-study-curated .case-reasoning-folder[open]>summary i{background:#51d1e6;color:#06202b;transform:rotate(45deg)}
+.case-study-curated .case-folder-body{padding:clamp(18px,2.5vw,30px)}
+.case-study-curated .case-folder-body>:first-child{margin-top:0}
+.case-study-curated .case-folder-body>:last-child{margin-bottom:0}
+
+/* Decision rationale was previously a permanently visible three-column panel. */
+.case-study-curated .decision-rationale.case-reasoning-folder{grid-template-columns:none;background:#0a2633}
+.case-study-curated .decision-rationale-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#31525f}
+.case-study-curated .decision-rationale-body>div{padding:16px;background:#071c28}
+.case-study-curated .decision-rationale-body span{display:block;margin:0 0 8px;color:var(--aqua);font:800 11px/1.35 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.case-study-curated .decision-rationale-body p{margin:0!important;color:#d7e5e7!important;font-size:15px!important;line-height:1.55!important}
+.case-study-curated .decision-rationale-body b{color:#fff}
+
+/* Nested disclosures should read as supporting files, not competing chapter cards. */
+.case-study-curated .case-folder .concept-inventory-disclosure,
+.case-study-curated .case-folder .case-support-details{margin-inline:0}
+.case-study-curated .case-folder .case-nav-preservation,
+.case-study-curated .case-folder .case-technical-difference,
+.case-study-curated .case-folder .case-google-review-system,
+.case-study-curated .case-folder .case-content-preservation,
+.case-study-curated .case-folder .case-preservation-plan,
+.case-study-curated .case-folder .research-callout,
+.case-study-curated .case-folder .case-optional-systems,
+.case-study-curated .case-folder .case-photo-plan{margin-top:0}
+.case-study-curated .case-folder .case-google-review-system + *,
+.case-study-curated .case-folder .case-technical-difference + *,
+.case-study-curated .case-folder .case-content-preservation + *{margin-top:24px}
+.case-study-curated #concept .case-folder-body > .case-note + .research-callout{margin-top:22px}
+
+@media(max-width:760px){
+  .case-study-curated .case-browse-guide{grid-template-columns:1fr}
+  .case-study-curated .case-browse-guide>div{padding:16px}
+  .case-study-curated .case-folder,
+  .case-study-curated .case-reasoning-folder{margin:18px 0}
+  .case-study-curated .case-folder>summary,
+  .case-study-curated .case-reasoning-folder>summary{min-height:60px;padding:12px 14px;gap:12px}
+  .case-study-curated .case-folder>summary b,
+  .case-study-curated .case-reasoning-folder>summary b{font-size:14px}
+  .case-study-curated .case-folder>summary small,
+  .case-study-curated .case-reasoning-folder>summary small{font-size:9px}
+  .case-study-curated .case-folder-body{padding:16px 14px 18px}
+  .case-study-curated .decision-rationale-body{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .case-study-curated .case-folder>summary i,
+  .case-study-curated .case-reasoning-folder>summary i{transition:none}
+}
+
+/* Phase 38.02.1 — executive case-study cleanup.
+   Visible content is for decisions; diligence stays optional. Screenshot evidence is removed. */
+.case-study-curated .case-section-lead{
+  max-width:760px;
+  margin:0 0 22px!important;
+  color:#d2e3e6!important;
+  font-size:16px!important;
+  line-height:1.6!important;
+}
+.case-study-curated .case-concept-highlights,
+.case-study-curated .case-growth-highlights{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:24px 0;
+}
+.case-study-curated .case-concept-highlights article,
+.case-study-curated .case-growth-highlights article{
+  padding:20px;
+  border:1px solid #31525f;
+  background:#f4f7f3;
+  color:#183640;
+}
+.case-study-curated .case-concept-highlights span,
+.case-study-curated .case-growth-highlights b{
+  display:block;
+  margin-bottom:7px;
+  color:#0b7287;
+  font:800 11px/1.3 var(--mono);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.case-study-curated .case-concept-highlights b,
+.case-study-curated .case-growth-highlights span{
+  display:block;
+  color:#183640;
+  font:750 16px/1.45 Manrope,Arial,sans-serif;
+}
+.case-study-curated .case-live-concept{
+  grid-column:1 / -1;
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin:22px 0 30px;
+  padding:18px 20px;
+  border:1px solid #31525f;
+  background:#071c28;
+}
+.case-study-curated .case-live-concept .cta{flex:0 0 auto;margin:0}
+.case-study-curated .case-live-concept p{margin:0!important;color:#c8d9dc!important;font-size:14px!important;line-height:1.55!important}
+.case-study-curated .audit-stories>article>p:not(.status){max-width:720px}
+.case-study-curated .audit-stories>article>.decision-rationale{margin-top:16px}
+
+@media(max-width:760px){
+  .case-study-curated .case-concept-highlights,
+  .case-study-curated .case-growth-highlights{grid-template-columns:1fr}
+  .case-study-curated .case-live-concept{align-items:flex-start;flex-direction:column;padding:16px}
+}
+
+/* Phase 38.05 — StoryBrand + tactical-empathy proposal architecture.
+   Keep AquaBlast/Ryan as the hero, make concerns safe to state, and keep
+   decision detail available without forcing it into the primary reading path. */
+.proposal-page .proposal-empathy{background:#f7f9f6;border-top:1px solid #d5e0dc;border-bottom:1px solid #d5e0dc}
+.proposal-page .proposal-empathy-close{max-width:820px;margin:22px 0 0;padding:16px 18px;border-left:4px solid var(--chartreuse);background:#eef3ef;color:#34525a;font-size:14px;line-height:1.6}
+.proposal-page .proposal-empathy-close b{color:#0a2935}
+
+.proposal-page .proposal-decision-questions{background:#071d28;color:#edf7f5}
+.proposal-page .proposal-decision-questions .kicker{color:#79deeb}
+.proposal-page .proposal-decision-questions h2{color:#fff;max-width:900px}
+.proposal-page .proposal-question-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+.proposal-page .proposal-question-grid article{min-width:0;padding:24px;border:1px solid #315260;border-top:4px solid var(--chartreuse);background:#0a2633}
+.proposal-page .proposal-question-grid span{display:block;color:#79deeb;font:800 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.proposal-page .proposal-question-grid b{display:block;margin-top:10px;color:#fff;font:750 clamp(19px,2vw,24px)/1.12 var(--display)}
+.proposal-page .proposal-question-grid p{margin:10px 0 0;color:#bdd0d4;font-size:14px;line-height:1.58}
+
+.proposal-page .proposal-detail-folder{display:block;margin:0;border-top:1px solid #31505c;background:#061b26;color:#fff}
+.proposal-page .proposal-detail-folder>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px;padding:20px max(22px,calc((100vw - 1180px)/2));cursor:pointer;list-style:none;background:#08212d}
+.proposal-page .proposal-detail-folder>summary::-webkit-details-marker{display:none}
+.proposal-page .proposal-detail-folder>summary>span{display:grid;gap:4px;min-width:0}
+.proposal-page .proposal-detail-folder>summary b{color:#fff;font:750 21px/1.08 var(--display)}
+.proposal-page .proposal-detail-folder>summary small{color:#9eb8be;font-size:12px;line-height:1.45}
+.proposal-page .proposal-detail-folder>summary i{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border:1px solid #51d1e6;color:#51d1e6;font:500 25px/1 Arial,sans-serif;font-style:normal;transition:transform .18s ease,background-color .18s ease,color .18s ease}
+.proposal-page .proposal-detail-folder>summary:hover{background:#0b2936}
+.proposal-page .proposal-detail-folder>summary:focus-visible{outline:3px solid #51d1e6;outline-offset:-3px}
+.proposal-page .proposal-detail-folder[open]>summary i{transform:rotate(45deg);background:#51d1e6;color:#06212c}
+.proposal-page .proposal-detail-folder-body{background:#eef3ef;color:#14333d}
+.proposal-page .proposal-folder-section{padding-top:46px;padding-bottom:50px}
+
+.proposal-page .proposal-package .proposal-detail-folder{margin:22px -26px -26px;border-top:1px solid #d1ddda;background:#f6f8f5;color:#173b45}
+.proposal-page .proposal-package .proposal-detail-folder>summary{min-height:62px;padding:15px 20px;background:#eef3ef}
+.proposal-page .proposal-package .proposal-detail-folder>summary:hover{background:#e8efeb}
+.proposal-page .proposal-package .proposal-detail-folder>summary b{color:#092f3c;font-size:16px}
+.proposal-page .proposal-package .proposal-detail-folder>summary small{color:#60777b;font-size:11px}
+.proposal-page .proposal-package .proposal-detail-folder>summary i{border-color:#0b7891;color:#0b7891}
+.proposal-page .proposal-package .proposal-detail-folder[open]>summary i{background:#0b7891;color:#fff}
+.proposal-page .proposal-package .proposal-detail-folder-body{background:#fff}
+.proposal-page .proposal-package .proposal-receipt{margin:0;border:0;box-shadow:none}
+
+.proposal-page .proposal-boundary-details .proposal-detail-folder-body{background:#061b26;color:#fff}
+.proposal-page .proposal-boundary-details .proposal-boundaries{padding:34px clamp(22px,5vw,70px) 50px}
+
+.proposal-page .proposal-voss-close{max-width:820px;margin:28px 0 0;padding:22px;border:1px solid #315260;border-left:5px solid var(--chartreuse);background:#08212d;color:#edf7f5}
+.proposal-page .proposal-voss-close span{display:block;color:#79deeb;font:800 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.proposal-page .proposal-voss-close b{display:block;margin-top:8px;color:#fff;font:750 24px/1.1 var(--display)}
+.proposal-page .proposal-voss-close p{margin:10px 0 0;color:#bdd0d4;font-size:14px;line-height:1.6}
+
+/* Do not visually pre-select a package. The comparison should earn the choice. */
+.proposal-page .proposal-package{box-shadow:0 10px 28px rgba(4,36,47,.09)}
+.proposal-page .proposal-package-primary{box-shadow:0 10px 28px rgba(4,36,47,.09)}
+
+@media(max-width:760px){
+  .proposal-page .proposal-question-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-detail-folder>summary{padding:18px 20px}
+  .proposal-page .proposal-detail-folder>summary b{font-size:18px}
+  .proposal-page .proposal-folder-section{padding:36px 20px 40px}
+  .proposal-page .proposal-package .proposal-detail-folder{margin:20px -18px -18px}
+  .proposal-page .proposal-package .proposal-detail-folder>summary{padding:14px 16px}
+  .proposal-page .proposal-boundary-details .proposal-boundaries{padding:28px 20px 38px}
+}
+
+@media(max-width:900px){
+  .proposal-page .proposal-package-grid{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .proposal-page .proposal-detail-folder>summary i{transition:none}
+}
+
+/* Phase 38.06 — StoryBrand + full Voss decision architecture.
+   Keep the customer/owner story visible; use tactical empathy, a "that's right" summary,
+   calibrated/No-oriented questions, precise pricing, and Black-Swan discovery without turning
+   the proposal into a negotiation script. */
+.proposal-page .proposal-accusation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.proposal-page .proposal-thats-right{background:#08212d;color:#edf7f5;border-top:1px solid #315260;border-bottom:1px solid #315260}
+.proposal-page .proposal-thats-right .kicker{color:#79deeb}
+.proposal-page .proposal-thats-right h2{color:#fff}
+.proposal-page .proposal-thats-right .proposal-current-intro{max-width:900px;color:#c5d7da;font-size:clamp(16px,1.45vw,19px);line-height:1.65}
+.proposal-page .proposal-summary-check{max-width:820px;margin:22px 0 0;padding:16px 18px;border-left:4px solid var(--chartreuse);background:rgba(255,255,255,.055);color:#dce8e9;font-size:14px;line-height:1.6}
+.proposal-page .proposal-summary-check b{color:#fff}
+.proposal-page .proposal-no-question{max-width:880px;margin:24px 0 0;padding:20px 22px;border:1px solid #315260;border-left:5px solid var(--chartreuse);background:#071e29;color:#edf7f5}
+.proposal-page .proposal-no-question span{display:block;color:#79deeb;font:800 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.proposal-page .proposal-no-question b{display:block;margin-top:8px;color:#fff;font:750 clamp(19px,2vw,24px)/1.14 var(--display)}
+.proposal-page .proposal-no-question p{margin:10px 0 0;color:#bdd0d4;font-size:14px;line-height:1.6}
+@media(max-width:760px){
+  .proposal-page .proposal-accusation-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-no-question{padding:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .proposal-page .proposal-no-question,.proposal-page .proposal-summary-check{scroll-behavior:auto}
+}
+
+/* Phase 38.07 — relationship-rate pricing authority. Preserve full project value while making the AquaBlast concession explicit and reciprocal. */
+.proposal-relationship-rate{background:linear-gradient(180deg,#f8fbfa 0%,#eef5f2 100%)}
+.proposal-relationship-grid article strong{display:block;margin-top:7px;color:#0a6479}
+.proposal-package-rate{margin-top:12px}
+.proposal-package-rate>span,.proposal-package-rate>small{display:block;color:#6a7d80;font:700 9px/1.35 var(--mono);letter-spacing:.055em;text-transform:uppercase}
+.proposal-package-rate>span{display:inline-block;padding:4px 9px;border-left:3px solid #0b7891;background:#eaf4f4;color:#0b6276;text-decoration:none}
+.proposal-package-rate h3{margin:6px 0 5px}
+.proposal-package-rate>small{color:#0b7891;text-transform:none;letter-spacing:.02em}
+.proposal-package-savings{margin:8px 0 0;color:#0b6276;font:800 12px/1.4 var(--sans)}
+@media(max-width:760px){.proposal-package-rate>span,.proposal-package-rate>small{font-size:8.5px}.proposal-relationship-grid{grid-template-columns:1fr}}
+
+/* Phase 38.10 — private presentation anchor authority.
+   Sticky proposal/case-study navigation must not cover anchored headings. */
+.case-study-curated [id],
+.proposal-page [id]{scroll-margin-top:108px}
+@media(max-width:760px){
+  .case-study-curated [id],
+  .proposal-page [id]{scroll-margin-top:88px}
+}
+
+
+/* Phase 38.11 — lead-generation + reciprocity business-value clarification.
+   Keep the public/customer system honest: direct conversion for ready visitors,
+   useful ungated value for earlier-stage visitors, and no unmeasured lead promises. */
+.case-study-curated .case-growth-highlights{grid-template-columns:repeat(4,minmax(0,1fr))}
+.case-study-curated .case-lead-path{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 12px}
+.case-study-curated .case-lead-path>div{padding:20px;border:1px solid #31525f;background:#071c28;color:#dce9e8}
+.case-study-curated .case-lead-path span{display:block;margin-bottom:7px;color:#5bdff2;font:800 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.case-study-curated .case-lead-path b{display:block;color:#fff;font:750 17px/1.35 Manrope,Arial,sans-serif}
+.case-study-curated .case-lead-path p{margin:8px 0 0!important;color:#c8d9dc!important;font-size:14px!important;line-height:1.6!important}
+.case-study-curated .case-lead-principle{max-width:820px;margin:0 0 22px!important;padding:16px 18px;border-left:4px solid var(--chartreuse);background:#eef3ef;color:#34525a!important;font-size:14px!important;line-height:1.65!important}
+.case-study-curated .case-lead-principle b{color:#0a2935}
+.proposal-page .proposal-lead-generation{background:#f4f7f3}
+.proposal-page .proposal-lead-generation .proposal-current-source{border-left:4px solid var(--chartreuse);padding-left:16px}
+@media(max-width:900px){.case-study-curated .case-growth-highlights{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.case-study-curated .case-growth-highlights,.case-study-curated .case-lead-path{grid-template-columns:1fr}}
+
+/* Phase 38.13 — final private-presentation responsive authority.
+   The owner-facing case study and proposal must remain comfortably readable on
+   phones/tablets, not merely avoid document overflow. This layer intentionally
+   overrides older full-bleed presentation experiments on compact viewports. */
+.case-study-curated,
+.proposal-page,
+.proposal-page main,
+.proposal-header{box-sizing:border-box;min-width:0}
+.case-study-curated img,
+.proposal-page img{max-width:100%;height:auto}
+
+/* Mid-width proposal layouts should choose readability over squeezing desktop grids. */
+@media(max-width:1100px){
+  .proposal-header{padding-inline:22px;gap:18px}
+  .proposal-header-actions{min-width:0}
+  .proposal-page section{padding-inline:28px}
+  .proposal-page .proposal-current,
+  .proposal-page .proposal-nochange{padding-inline:28px}
+  .proposal-page .proposal-question-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-package-grid-two{grid-template-columns:1fr}
+  .proposal-page .proposal-nochange{grid-template-columns:1fr}
+  .proposal-page .proposal-decision-summary-head{grid-template-columns:1fr}
+  .proposal-page .proposal-compare-row{grid-template-columns:1fr}
+  .proposal-page .proposal-compare-head{display:none}
+  .proposal-page .proposal-compare-row>*+*{border-left:0;border-top:1px solid #e1e8e5}
+  .proposal-page .proposal-compare-row>span{padding-bottom:9px;background:#f2f5f1}
+  .proposal-page .proposal-compare-row>p{padding-top:12px}
+  .proposal-page .proposal-compare-row>p:first-of-type::before{content:'$7,487 · ';font-weight:800;color:#173b45}
+  .proposal-page .proposal-compare-row>p:last-child::before{content:'$9,493 · ';font-weight:800;color:#173b45}
+  .proposal-page .proposal-compare-row:last-of-type>p:first-of-type::before,
+  .proposal-page .proposal-compare-row:last-of-type>p:last-child::before{content:''}
+  .proposal-page .proposal-decision-fit{grid-template-columns:1fr}
+  .proposal-page .proposal-decision-fit article+article{border-left:0;border-top:1px solid #cad8d4}
+  .proposal-page .proposal-plan-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-price-confidence-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-term-grid,
+  .proposal-page .proposal-boundary-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-extension-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Tablet case-study composition: retire dense desktop columns before they feel cramped. */
+@media(max-width:900px){
+  .case-study-curated .case-situation,
+  .case-study-curated .case-next{grid-template-columns:1fr;gap:24px}
+  .case-study-curated .audit-stories,
+  .case-study-curated .case-search-summary,
+  .case-study-curated .validation-grid{grid-template-columns:1fr}
+  .case-study-curated .case-current-site-grid,
+  .case-study-curated .case-at-glance{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .case-study-curated .case-meeting-brief ol{grid-template-columns:1fr}
+  .case-study-curated .decision-rationale-body{grid-template-columns:1fr}
+}
+
+@media(max-width:760px){
+  /* Maintain a real 20px phone gutter and remove historical edge-breaking modules. */
+  .case-study-curated{padding-inline:20px;overflow-x:clip}
+  .case-study-curated .case-index{margin-inline:0;padding-inline:16px}
+  .case-study-curated .case-journey,
+  .case-study-curated .case-conclusion,
+  .case-study-curated .professional-guide,
+  .case-study-curated .identity-system,
+  .case-study-curated .case-search,
+  .case-study-curated .case-companycam{margin-inline:0!important}
+  .case-study-curated .case-journey,
+  .case-study-curated .case-conclusion,
+  .case-study-curated .professional-guide,
+  .case-study-curated .identity-system,
+  .case-study-curated .case-search,
+  .case-study-curated .case-companycam{padding-inline:18px!important;border-inline:1px solid #31525f}
+  .case-study-curated .case-owner-brief,
+  .case-study-curated .case-meeting-brief{margin-inline:0}
+
+  /* Progressive-disclosure text should never sit on the audit's minimum edge. */
+  .case-study-curated .case-folder>summary,
+  .case-study-curated .case-reasoning-folder>summary{padding:14px 18px}
+  .case-study-curated .case-folder-body{padding:18px}
+  .case-study-curated .case-browse-guide>div{padding:18px}
+  .case-study-curated .concept-inventory-disclosure>summary{padding-inline:18px}
+  .case-study-curated .term-help summary{padding-inline:18px}
+  .case-study-curated .term-help p{padding-inline:18px}
+  .case-study-curated .decision-rationale-body>div{padding-inline:18px}
+
+  /* Proposal phone authority: one-column decisions and consistent internal gutters. */
+  .proposal-header{padding:12px 18px}
+  .proposal-page main{overflow-x:clip}
+  .proposal-page section,
+  .proposal-page .proposal-current,
+  .proposal-page .proposal-nochange,
+  .proposal-page .proposal-folder-section{padding-inline:20px}
+  .proposal-page .proposal-package{padding-inline:20px}
+  .proposal-page .proposal-detail-folder>summary{padding:18px}
+  .proposal-page .proposal-package .proposal-detail-folder>summary{padding:16px 18px}
+  .proposal-page .proposal-folder-section{padding-left:20px;padding-right:20px}
+  .proposal-page .proposal-boundary-details .proposal-boundaries{padding-inline:20px}
+  .proposal-page .proposal-receipt-row{padding-left:18px;padding-right:18px}
+  .proposal-page .proposal-receipt-group{padding-left:18px;padding-right:18px}
+  .proposal-page .proposal-receipt-total{padding-inline:18px}
+  .proposal-page .proposal-extension-grid{grid-template-columns:1fr}
+  .proposal-page .proposal-current-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:360px){
+  .case-study-curated .case-overview>h1{font-size:clamp(36px,11vw,44px)}
+  .proposal-page h1{font-size:clamp(42px,13vw,50px)}
+  .proposal-page h2{font-size:clamp(31px,10vw,40px)}
+  .proposal-header-actions a,
+  .proposal-header-actions button{padding-inline:10px}
+}
+
+/* Phase 38.14 — private disclosure gutter authority.
+   Browser QA showed the remaining responsive debt was concentrated in the
+   owner-facing progressive-disclosure system, not the underlying content.
+   Keep every private disclosure comfortably inset from the viewport and give
+   summary/body text a true >=18px internal gutter at all presentation widths. */
+.case-study-curated .case-folder > summary,
+.case-study-curated .case-reasoning-folder > summary,
+.case-study-curated .concept-inventory-disclosure > summary,
+.case-study-curated .term-help > summary{
+  padding-left:20px;
+  padding-right:20px;
+}
+.case-study-curated .case-folder-body,
+.case-study-curated .case-reasoning-folder .decision-rationale-body,
+.case-study-curated .term-help > p{
+  padding-left:20px;
+  padding-right:20px;
+}
+
+@media(max-width:1100px){
+  /* The five top-level proposal diligence folders were intentionally full-bleed
+     on desktop. At tablet/laptop widths that put the summary/body box directly
+     on the viewport edge, so inset the folder itself rather than merely its text. */
+  .proposal-page main > .proposal-detail-folder{
+    margin-left:20px;
+    margin-right:20px;
+    border-left:1px solid #31505c;
+    border-right:1px solid #31505c;
+  }
+  .proposal-page main > .proposal-detail-folder > summary{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .proposal-page main > .proposal-detail-folder .proposal-folder-section{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .proposal-page main > .proposal-boundary-details .proposal-boundaries{
+    padding-left:20px;
+    padding-right:20px;
+  }
+}
+
+@media(max-width:760px){
+  .proposal-page main > .proposal-detail-folder{
+    margin-left:18px;
+    margin-right:18px;
+  }
+  .proposal-page main > .proposal-detail-folder > summary{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .proposal-page main > .proposal-detail-folder .proposal-folder-section{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .proposal-page main > .proposal-boundary-details .proposal-boundaries{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  /* Keep package receipts inside the package card on compact widths; the old
+     negative-margin treatment can make the disclosure appear edge-to-edge. */
+  .proposal-page .proposal-package .proposal-detail-folder{
+    margin:20px 0 0;
+  }
+  .proposal-page .proposal-package .proposal-detail-folder > summary{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .proposal-page .proposal-package .proposal-detail-folder-body{
+    padding-left:0;
+    padding-right:0;
+  }
+}
+
+@media(max-width:360px){
+  .case-study-curated{padding-left:22px;padding-right:22px}
+  .proposal-page section,
+  .proposal-page .proposal-current,
+  .proposal-page .proposal-nochange,
+  .proposal-page .proposal-folder-section{padding-left:22px;padding-right:22px}
+  .proposal-page main > .proposal-detail-folder{margin-left:20px;margin-right:20px}
+}
+
+/* Phase 38.15 — final ultra-narrow private presentation closure.
+   38.14 reduced the private browser matrix to four narrow-width failures.
+   The remaining proposal debt came from a partially visible horizontal action
+   strip around 375–390px; wrap those controls instead of presenting a clipped
+   scroller. The remaining case-study debt is isolated to 320px, where long
+   private-presentation controls need one more layer of breathing room. */
+@media(max-width:430px){
+  .proposal-header-actions{
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    gap:6px;
+    overflow-x:visible;
+    padding:2px 0 0;
+  }
+  .proposal-header-actions a,
+  .proposal-header-actions button{
+    flex:0 0 auto;
+    min-height:36px;
+    padding-inline:8px;
+    font-size:8px;
+    white-space:nowrap;
+  }
+}
+
+@media(max-width:340px){
+  .case-study-curated{
+    padding-left:24px;
+    padding-right:24px;
+  }
+  .case-study-curated .case-index{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .case-study-curated :where(p,li,summary,a,button,dt,dd,blockquote,figcaption){
+    max-inline-size:100%;
+    overflow-wrap:anywhere;
+  }
+  .case-study-curated :where(.cta,.secondary),
+  .case-study-curated .case-live-concept .cta,
+  .case-study-curated .case-proposal-link .cta{
+    max-width:100%;
+    white-space:normal;
+    text-align:center;
+  }
+  .case-study-curated .case-live-concept .cta,
+  .case-study-curated .case-proposal-link .cta{
+    width:100%;
+    justify-content:center;
+  }
+}
+
+/* Phase 38.16 — 320px case-study containment closure.
+   The final private browser gate isolated all remaining hard failures to the
+   case study at 320px. Keep the content and hierarchy unchanged; enforce a
+   single safe ultra-narrow containment contract for every private block. */
+@media(max-width:340px){
+  .case-study-curated,
+  .case-study-curated *{box-sizing:border-box;min-width:0}
+
+  .case-study-curated :where(
+    section,article,details,nav,header,footer,figure,blockquote,
+    .case-folder,.case-reasoning-folder,.term-help,.case-browse-guide,
+    .case-current-site,.case-content-preservation,.case-google-review-system,
+    .case-nav-preservation,.case-technical-difference
+  ){
+    max-width:100%;
+  }
+
+  .case-study-curated .case-folder,
+  .case-study-curated .case-reasoning-folder,
+  .case-study-curated .term-help{
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+
+  .case-study-curated .case-folder>summary,
+  .case-study-curated .case-reasoning-folder>summary,
+  .case-study-curated .term-help>summary,
+  .case-study-curated .concept-inventory-disclosure>summary{
+    padding-left:22px;
+    padding-right:22px;
+  }
+
+  .case-study-curated .case-folder-body,
+  .case-study-curated .case-reasoning-folder .decision-rationale-body,
+  .case-study-curated .term-help>p{
+    padding-left:22px;
+    padding-right:22px;
+  }
+
+  .case-study-curated :where(h1,h2,h3,p,li,summary,label,dt,dd,figcaption,blockquote,a,button){
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+
+  .case-study-curated :where(a.cta,a.secondary,button.cta,button.secondary){
+    width:100%;
+    white-space:normal;
+    text-align:center;
+    justify-content:center;
+  }
+
+  .case-study-curated .case-index,
+  .case-study-curated .case-owner-brief,
+  .case-study-curated .case-meeting-brief,
+  .case-study-curated .case-current-site,
+  .case-study-curated .case-content-preservation,
+  .case-study-curated .case-google-review-system,
+  .case-study-curated .case-nav-preservation,
+  .case-study-curated .case-technical-difference{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+}
+
+/* Phase 38.17 — exact 320px accordion text-right closure.
+   The browser report isolated the last hard failures to rendered descendant text
+   inside two case-study folders. The outer folder/body gutters were already safe;
+   these nested panels need additional right-side inset at 320px so glyph bounds
+   stay comfortably inside the details edge. */
+@media(max-width:340px){
+  .case-study-curated .case-folder-body > .case-current-site,
+  .case-study-curated .case-folder-body > .case-nav-preservation,
+  .case-study-curated .case-folder-body > .case-technical-difference{
+    width:auto!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:22px!important;
+    padding-right:44px!important;
+  }
+}
+
+
+/* Phase 38.18 — exact 320px audit-target closure.
+   The automated browser report identifies only two remaining accordion bodies.
+   Shrink the specific inner content rails instead of adding more shell padding, so
+   every descendant text run clears the details right edge without changing any
+   larger breakpoint or Ryan-facing content. */
+@media(max-width:340px){
+  .case-study-curated .case-folder-protecting .case-current-site-grid,
+  .case-study-curated .case-folder-seo-safeguards .case-nav-preservation,
+  .case-study-curated .case-folder-seo-safeguards .case-technical-difference{
+    width:auto!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:24px!important;
+  }
+}
+
+
+/* 2026-09-27 — evidence-led design reasoning for the private case study. */
+.case-study-curated .case-design-reasoning{margin-block:clamp(34px,5vw,64px);padding:clamp(28px,4vw,52px);border:1px solid #31525f;border-radius:24px;background:linear-gradient(180deg,rgba(8,44,56,.035),rgba(8,44,56,.015))}
+.case-study-curated .case-design-reasoning-head{max-width:860px}
+.case-study-curated .case-design-reasoning-head h2{max-width:820px;text-wrap:balance}
+.case-study-curated .case-reasoning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.case-study-curated .case-reasoning-grid article{min-width:0;padding:22px;border:1px solid rgba(49,82,95,.34);border-radius:18px;background:#fff}
+.case-study-curated .case-reasoning-grid article:last-child{grid-column:1/-1}
+.case-study-curated .case-reasoning-grid article>span{display:block;margin-bottom:8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.case-study-curated .case-reasoning-grid h3{margin:0 0 12px;font-size:clamp(20px,2vw,25px);line-height:1.18}
+.case-study-curated .case-reasoning-grid p{margin:9px 0;max-width:68ch}
+.case-study-curated .case-evidence-level{padding-top:10px;border-top:1px solid rgba(49,82,95,.2)}
+.case-study-curated .case-evidence-boundary{margin-top:20px;padding:clamp(22px,3vw,32px);border-radius:20px;background:#082c38;color:#f7fbfc}
+.case-study-curated .case-evidence-boundary :is(h3,p){color:inherit}
+.case-study-curated .case-evidence-boundary h3{max-width:780px;margin-top:6px;text-wrap:balance}
+.case-study-curated .case-evidence-framework{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.case-study-curated .case-evidence-framework div{padding:16px;border:1px solid rgba(255,255,255,.22);border-radius:14px;background:rgba(255,255,255,.06)}
+.case-study-curated .case-evidence-framework b,.case-study-curated .case-evidence-framework span{display:block}
+.case-study-curated .case-evidence-framework b{margin-bottom:5px;font-size:18px}
+.case-study-curated .case-evidence-framework span{font-size:14px;line-height:1.5}
+.case-study-curated .case-evidence-close{margin:20px 0 0;max-width:76ch}
+@media(max-width:760px){.case-study-curated .case-design-reasoning{padding:22px 18px}.case-study-curated .case-reasoning-grid,.case-study-curated .case-evidence-framework{grid-template-columns:1fr}.case-study-curated .case-reasoning-grid article:last-child{grid-column:auto}}
+
+/* 2026-09-27 — regression fix: the new evidence cards sit on a light surface,
+   so give their copy explicit dark presentation colors instead of inheriting
+   the case-study's light-on-dark section typography. */
+.case-study-curated .case-reasoning-grid article{color:#183640}
+.case-study-curated .case-reasoning-grid article>span{color:#0b7287}
+.case-study-curated .case-reasoning-grid h3{color:#0b2934}
+.case-study-curated .case-reasoning-grid p{color:#183640}
+.case-study-curated .case-reasoning-grid .case-evidence-level{color:#35545e}
+
+/* Print the proposal as a document, not as a narrow responsive viewport. */
+@media print{
+  .proposal-page section{padding-block:18px}
+  .proposal-page h1{font-size:34pt!important;line-height:1.02!important}
+  .proposal-page h2{font-size:22pt!important;line-height:1.08!important}
+  .proposal-page h3{font-size:17pt!important;line-height:1.12!important}
+  .proposal-page .proposal-current-grid,
+  .proposal-page .proposal-plan-grid,
+  .proposal-page .proposal-boundary-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px}
+  .proposal-page .proposal-term-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px}
+  .proposal-page :is(.proposal-current-grid,.proposal-plan-grid,.proposal-boundary-grid,.proposal-term-grid) article{break-inside:avoid;padding:12px;box-shadow:none!important}
+  .proposal-page .proposal-term-grid article{background:#f2f6f4!important}
+  .proposal-page .proposal-term-grid :is(b,span),
+  .proposal-page .proposal-boundary-grid :is(b,p){color:#173b45!important}
+  .proposal-page .proposal-decision-summary{break-inside:auto}
+  .proposal-page .proposal-decision-summary-head{padding:16px 18px}
+  .proposal-page .proposal-compare-row{display:grid!important;grid-template-columns:32% 34% 34%!important;align-items:stretch!important;break-inside:avoid}
+  .proposal-page .proposal-compare-row>*{padding:8px 10px!important;border-top:0!important}
+  .proposal-page .proposal-compare-row>*+*{border-left:1px solid #ccd8d4!important}
+  .proposal-page .proposal-compare-row>span,
+  .proposal-page .proposal-compare-row>p{background:#f2f6f4!important}
+  .proposal-page .proposal-compare-row>p::before{content:none!important}
+  .proposal-page .proposal-compare-head{display:grid!important;background:#dce9e7!important}
+  .proposal-page .proposal-compare-head>*{color:#173b45!important}
+  .proposal-page .proposal-detail-folder{break-inside:auto;border-color:#b8c7c4!important;background:#fff!important;color:#173b45!important}
+  .proposal-page .proposal-detail-folder>summary{min-height:0;padding:12px 0!important;border-bottom:1px solid #b8c7c4;background:#fff!important}
+  .proposal-page .proposal-detail-folder>summary :is(b,small){color:#173b45!important}
+  .proposal-page .proposal-detail-folder>summary i{display:none!important}
+  .proposal-page .proposal-detail-folder-body{display:block!important;background:#fff!important;color:#173b45!important}
+  .proposal-page .proposal-folder-section{padding:16px 0!important}
+  .proposal-page .proposal-boundary-details .proposal-detail-folder-body,
+  .proposal-page .proposal-boundary-details .proposal-boundaries{padding:16px 0!important;background:#fff!important;color:#173b45!important}
+  .proposal-page .proposal-boundary-details .proposal-boundary-intro{color:#324e57!important}
+  .proposal-page .proposal-boundary-grid article{border:1px solid #b8c7c4!important;border-top:2px solid #0b7891!important;background:#fff!important}
+  .proposal-page .proposal-plan,
+  .proposal-page .proposal-relationship-rate,
+  .proposal-page .proposal-current[aria-labelledby="proposal-support-title"]{break-inside:avoid}
+  .proposal-page .proposal-next{break-inside:avoid}
+}
